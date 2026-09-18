@@ -8,8 +8,35 @@ One plugin: **`leeloo@leeloo-ai`** — connects the Leeloo.AI MCP server
 Give this prompt to a Claude Code agent:
 
 ```
-/goal Read https://raw.githubusercontent.com/Leeloo-AI-RGA-OS/leeloo-agent-plugin/main/leeloo-plugin-install.md and follow it to install and connect Leeloo
+/goal Read https://raw.githubusercontent.com/Leeloo-AI-RGA-OS/leeloo.ai-mcp/main/install.md and install Leeloo
 ```
 
-The full flow lives in [leeloo-plugin-install.md](./leeloo-plugin-install.md):
-install the plugin → try to connect → run `/mcp` if needed → advise a new session as fallback.
+The agent picks the right path for the host it is running in. The full flow lives in
+[install.md](./install.md).
+
+**Terminal / IDE (the `claude` CLI is on PATH).** The agent adds the marketplace and
+installs the plugin itself.
+
+**Desktop app (no CLI).** There is no `claude` binary to run, so the agent downloads
+[leeloo.zip](https://github.com/Leeloo-AI-RGA-OS/leeloo.ai-mcp/releases/latest/download/leeloo.zip)
+from the latest release and asks you to add it via **Add → Upload plugin**.
+
+Either way, finish in a **new session**: the plugin registers its MCP server at session
+start. Run `/mcp` → **Leeloo** → **Authenticate** → **Allow access**. Only you can
+complete the sign-in.
+
+### Tools without the plugin
+
+If you want the Leeloo MCP tools but not the bundled skills, register the server
+directly and skip the plugin entirely:
+
+```sh
+claude mcp add-json --scope user leeloo '{"type":"http","url":"https://app.leeloo.ai/mcp","oauth_resource":"https://app.leeloo.ai/mcp","headers":{"x-leeloo-mcp-client":"claude_code"}}'
+```
+
+## Releases
+
+Each release attaches `leeloo.zip` — the plugin directory (`.claude-plugin/` plus
+`skills/`) packaged for **Add → Upload plugin**. The
+`releases/latest/download/leeloo.zip` link above always resolves to the newest one,
+so the install page never needs updating when a new version ships.
