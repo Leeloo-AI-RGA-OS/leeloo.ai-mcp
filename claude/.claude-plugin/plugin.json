@@ -1,13 +1,13 @@
 {
   "name": "leeloo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Leeloo.AI plugin for building funnels, lead-gen tools, offers and analytics from Claude Code.",
   "author": {
     "name": "Leeloo.AI",
     "url": "https://leeloo.ai"
   },
   "homepage": "https://leeloo.ai",
-  "repository": "https://github.com/Leeloo-AI-RGA-OS/leeloo-agent-plugin.git",
+  "repository": "https://github.com/Leeloo-AI-RGA-OS/leeloo.ai-mcp.git",
   "keywords": [
     "leeloo",
     "funnel",
