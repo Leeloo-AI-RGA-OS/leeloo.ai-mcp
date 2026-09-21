@@ -25,8 +25,9 @@ it falls back to downloading
 from the latest release and asking you to add it via **Add → Upload plugin**.
 
 Either way, finish in a **new session**: the plugin registers its MCP server at session
-start. Run `/mcp` → **Leeloo** → **Authenticate** → **Allow access**. Only you can
-complete the sign-in.
+start. Type `/leeloo:connect`, then **Leeloo** → **Authenticate** → **Allow access**.
+Only you can complete the sign-in. The same command reconnects Leeloo later if it ever
+stops answering — no reinstall needed.
 
 ### Tools without the plugin
 

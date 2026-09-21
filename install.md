@@ -57,12 +57,14 @@ appear only in a new session.
 Tell the user, in their language:
 
 1. Open a **new session (new tab)**.
-2. Run `/mcp`.
-3. Select **Leeloo** → **Authenticate** → sign in → **Allow access**.
+2. Type `/leeloo:connect` — it shows where to click: **Leeloo** → **Authenticate**.
+3. Sign in to Leeloo in the browser → **Allow access**.
 
-Only the user can finish sign-in; you cannot click Allow for them. The authoritative
-success signal is `Authenticated with "plugin:leeloo:leeloo"` — not `Connected` alone.
-Never run two logins at once.
+`/leeloo:connect` is the one command the user needs to remember; it also works later
+in the current session whenever Leeloo stops answering. Only the user can finish
+sign-in; you cannot click Allow for them. The authoritative success signal is
+`Authenticated with "plugin:leeloo:leeloo"` — not `Connected` alone. Never run two
+logins at once.
 
 ## 4. No CLI: install it, then install the plugin
 
