@@ -25,8 +25,7 @@ start rather than reading a slow first run as a failure.
 - Says the command was not found → step 4 (desktop path). That is `command not
   found` with exit 127 in Bash, or a `CommandNotFoundException` in PowerShell.
   Either one simply means the desktop app without a separately installed CLI,
-  which is the normal case, not a broken machine. Do not install the CLI here;
-  step 4 is the supported path.
+  which is the normal case, not a broken machine.
 
 Any other error is not a missing CLI. Report what it said instead of guessing.
 
@@ -65,24 +64,18 @@ Only the user can finish sign-in; you cannot click Allow for them. The authorita
 success signal is `Authenticated with "plugin:leeloo:leeloo"` — not `Connected` alone.
 Never run two logins at once.
 
-## 4. Desktop path (no CLI)
+## 4. No CLI: install it, then install the plugin
 
-The desktop Code tab has no `claude` binary, so installation is a file upload.
+The desktop Code tab has no `claude` binary. Install Anthropic's official CLI — it
+is a small native binary, needs no Node.js, and makes this and every future plugin
+install fully automatic.
 
-Download https://github.com/Leeloo-AI-RGA-OS/leeloo.ai-mcp/releases/latest/download/leeloo.zip
-and tell the user where you saved it, then:
+Installing software is the user's decision. Ask once, in plain words, before
+running anything: "Claude Code needs its command-line tool to install plugins.
+Install it now? (about a minute, no other software)". Accept a "no" without
+arguing and go to step 4b instead.
 
-1. **Add → Upload plugin** → pick that file.
-2. Continue at step 3.
-
-If the download fails, tell the user to get the file from the repository's Releases
-page themselves. Do not ask them to clone the repository or build an archive.
-
-### 4b. Optional: install the CLI instead
-
-Only if the upload path is unavailable or the user asks for it. Installing software
-is the user's decision — ask first, in plain words, and accept a "no" without
-arguing. Never run this silently as part of "install the plugin".
+On "yes", run the installer for the platform you are on:
 
 Windows PowerShell:
 
@@ -92,8 +85,28 @@ macOS, Linux, WSL:
 
     curl -fsSL https://claude.ai/install.sh | bash
 
-The new binary is not on this session's PATH yet. Call it by absolute path —
-`%USERPROFILE%\.local\bin\claude.exe` on Windows, `~/.local/bin/claude` elsewhere —
-and verify with `--version` (2.1.210 or newer). Then return to step 2.
+The new binary is not on this session's PATH yet — `claude` still reports "not
+found". That is expected. Call it by absolute path from here on:
+
+- Windows: `%USERPROFILE%\.local\bin\claude.exe`
+- macOS, Linux, WSL: `~/.local/bin/claude`
+
+Verify with `--version` (2.1.210 or newer), then run the step 2 commands through
+that absolute path and continue at step 3. From the next session on, plain `claude`
+works everywhere.
+
+If the installer itself fails (network, policy, permissions), report the exact
+error and go to step 4b. Never retry an installer in a loop.
+
+### 4b. Fallback: upload the plugin as a file
+
+Download https://github.com/Leeloo-AI-RGA-OS/leeloo.ai-mcp/releases/latest/download/leeloo.zip
+and tell the user where you saved it, then:
+
+1. **Add → Upload plugin** → pick that file.
+2. Continue at step 3.
+
+If the download fails, tell the user to get the file from the repository's Releases
+page themselves. Do not ask them to clone the repository or build an archive.
 
 If `claude --version` already worked at step 1, never run these installers.

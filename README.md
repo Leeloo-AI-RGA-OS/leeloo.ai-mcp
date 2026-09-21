@@ -17,9 +17,12 @@ The agent picks the right path for the host it is running in. The full flow live
 **Terminal / IDE (the `claude` CLI is on PATH).** The agent adds the marketplace and
 installs the plugin itself.
 
-**Desktop app (no CLI).** There is no `claude` binary to run, so the agent downloads
+**Desktop app (no CLI).** The agent asks once whether it may install Anthropic's
+official `claude` command-line tool (a small native binary, no Node.js). On "yes" it
+installs it and then installs the plugin itself, fully automatically. If you decline,
+it falls back to downloading
 [leeloo.zip](https://github.com/Leeloo-AI-RGA-OS/leeloo.ai-mcp/releases/latest/download/leeloo.zip)
-from the latest release and asks you to add it via **Add → Upload plugin**.
+from the latest release and asking you to add it via **Add → Upload plugin**.
 
 Either way, finish in a **new session**: the plugin registers its MCP server at session
 start. Run `/mcp` → **Leeloo** → **Authenticate** → **Allow access**. Only you can
