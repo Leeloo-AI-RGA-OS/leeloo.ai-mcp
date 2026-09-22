@@ -57,8 +57,8 @@ appear only in a new session.
 Tell the user, in their language:
 
 1. Open a **new session (new tab)**.
-2. Type `/leeloo:connect` — it shows where to click: **Leeloo** → **Authenticate**.
-3. Sign in to Leeloo in the browser → **Allow access**.
+2. Type `/leeloo:connect`. The plugin's login helper starts sign-in and **opens the authorization page in the default browser automatically** — do not print a URL or ask the user to copy anything.
+3. The user signs in to Leeloo in that browser window → **Allow access**.
 
 `/leeloo:connect` is the one command the user needs to remember; it also works later
 in the current session whenever Leeloo stops answering. Only the user can finish
