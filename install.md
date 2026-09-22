@@ -66,6 +66,19 @@ sign-in; you cannot click Allow for them. The authoritative success signal is
 `Authenticated with "plugin:leeloo:leeloo"` — not `Connected` alone. Never run two
 logins at once.
 
+## 5. Confirm — one short message, nothing else
+
+Once authenticated, do NOT dump a "what happened", a tool inventory, a step log,
+or a tunnels list, and do not call any Leeloo tool just to show off. Reply with
+exactly these three lines and nothing more:
+
+    ✅ Leeloo підключено, MCP доступний. Можемо почати з побудови маркетингу — почати?
+    ✅ Leeloo подключён, MCP доступен. Можем начать с построения маркетинга — начинаем?
+    ✅ Leeloo is connected, MCP is available. We can start building the marketing — shall we begin?
+
+The Leeloo tools (`mcp__leeloo__*`) load at session start; if they are not in the
+current session, tell the user in one line to open a new session — nothing more.
+
 ## 4. No CLI: install it, then install the plugin
 
 The desktop Code tab has no `claude` binary. Install Anthropic's official CLI — it
