@@ -1,0 +1,1645 @@
+<meta name="dash-one-writer">
+<style>
+/* Стиль Leeloo.ai: темно-синій, синій акцент, салатовий для результату; системний шрифт як на leeloo.ai */
+.fv { --lee-navy: #040d1b; --lee-ink: #13223a; --lee-mist: #9ba9be; --lee-blue: #499fff; --lee-sky: #6ea9ff; --lee-lime: #cdf973; --lee-green: #8dcc70; --lee-coral: #f76853;
+  --lee-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--lee-font); color: var(--color-fg); }
+.fv-brand { background: var(--lee-navy); color: #f4f7ff; border-radius: calc(var(--cds-radius) * 2); padding: clamp(20px, 4vw, 32px); position: relative; overflow: hidden; }
+.fv-brand::after { content: ""; position: absolute; right: -80px; top: -80px; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(73,159,255,.35), rgba(73,159,255,0) 70%); pointer-events: none; }
+.fv-brand-top { display: flex; align-items: center; justify-content: space-between; gap: var(--cds-gap-md); margin-bottom: var(--cds-gap-lg); position: relative; z-index: 1; }
+.fv-logo { height: 34px; width: auto; color: #ffffff; display: block; }
+.fv-brand-tag { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--lee-navy); background: var(--lee-lime); border-radius: 999px; padding: 4px 12px; font-weight: 700; }
+.fv-brand h1 { color: #ffffff; position: relative; z-index: 1; }
+.fv-brand .fv-lede { color: #dfe6f3; position: relative; z-index: 1; }
+.fv-brand .fv-lede b { color: var(--lee-lime); }
+.fv-brand .fv-meta { color: var(--lee-mist); position: relative; z-index: 1; }
+.fv h1 { font-family: var(--lee-font); font-weight: 650; letter-spacing: -0.01em; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.fv-lede { margin: var(--cds-gap-sm) 0 0; font-size: var(--cds-font-size-body); max-width: 72ch; line-height: 1.55; }
+.fv-lede b { font-variant-numeric: tabular-nums; }
+.fv-meta { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin-top: var(--cds-gap-xs); }
+.fv-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+.fv-controls { display: flex; flex-wrap: wrap; align-items: end; gap: var(--cds-gap-md); }
+.fv-field { display: flex; flex-direction: column; gap: 4px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-width: 0; }
+.fv-field input { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background-color: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 6px 8px; min-height: 34px; }
+.fv-field select.dash-select { max-width: min(380px, 82vw); }
+.fv-seg { display: inline-flex; border: 1px solid var(--color-border-line); border-radius: 999px; padding: 2px; background: var(--color-bg); }
+.fv-seg button { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); background: transparent; border: 0; border-radius: 999px; padding: 6px 16px; cursor: pointer; }
+.fv-seg button[aria-pressed="true"] { background: var(--lee-blue); color: var(--lee-navy); font-weight: 600; }
+.fv-presets { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+.fv-btn { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.fv-btn:hover { border-color: var(--lee-blue); }
+.fv button:focus-visible, .fv input:focus-visible, .fv select:focus-visible, .fv tr.pick:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.fv h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.fv-sub { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); max-width: 80ch; line-height: 1.5; }
+.fv-ads { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: var(--cds-gap-sm); margin-bottom: var(--cds-gap-lg); }
+.fv-ad { border: 1px dashed var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); min-width: 0; }
+.fv-lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+.fv-num { font-family: var(--lee-font); font-weight: 650; letter-spacing: -0.01em; font-size: 1.5rem; font-variant-numeric: tabular-nums; line-height: 1.15; margin-top: 2px; }
+.fv-small { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; margin-top: 2px; }
+.fv-journey { position: relative; min-height: 420px; display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.fv-stage { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-sm); }
+.fv-stage:first-child { border-top: 0; padding-top: 0; }
+.fv-stage-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cds-gap-sm); margin-bottom: 6px; }
+.fv-stage-no { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--lee-navy); background: var(--lee-blue); border-radius: 999px; padding: 2px 8px; }
+.fv-stage-title { font-weight: var(--cds-font-weight-medium); }
+.fv-stage-tag { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.fv-bridge { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-align: center; padding: 2px 0 6px; font-variant-numeric: tabular-nums; }
+.fv-row { display: grid; grid-template-columns: minmax(120px, 190px) 1fr minmax(110px, 190px); align-items: center; gap: var(--cds-gap-sm); min-height: 30px; }
+.fv-row-l { font-size: var(--cds-font-size-caption); color: var(--color-fg); min-width: 0; }
+.fv-row-r { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-align: right; font-variant-numeric: tabular-nums; min-width: 0; }
+.fv-track { display: flex; justify-content: center; min-width: 0; }
+.fv-bar { height: 24px; border-radius: 3px; display: flex; align-items: center; justify-content: center; min-width: 34px; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--lee-navy); transition: width .3s; }
+.fv-bar.out { color: var(--color-fg); }
+.fv-bar.sig { justify-content: flex-start; padding-left: 8px; }
+.fv-track.left { justify-content: flex-start; }
+.fv-empty { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: 4px 0; }
+@media (max-width: 560px) { .fv-row { grid-template-columns: 1fr; gap: 2px; } .fv-row-r { text-align: left; } }
+@media (prefers-reduced-motion: reduce) { .fv-bar { transition: none; } }
+.fv-out { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: var(--cds-gap-sm); margin-top: var(--cds-gap-lg); padding-top: var(--cds-gap-lg); border-top: 1px solid var(--color-border-line); }
+.fv-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.55; margin: var(--cds-gap-md) 0 0; max-width: 80ch; }
+.fv-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); color: var(--color-fg); white-space: nowrap; z-index: 3; }
+.fv-tip span { display: block; color: var(--cds-text-secondary); }
+.fv svg text { font-family: var(--font-anthropic-sans); }
+.fv .t-lbl { fill: var(--color-fg); font-size: 13px; }
+.fv .t-num { fill: var(--color-fg); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fv .t-mut { fill: var(--cds-text-secondary); font-size: 12px; font-variant-numeric: tabular-nums; }
+.fv-tablewrap { overflow-x: auto; }
+.fv table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.fv th, .fv td { text-align: right; padding: 7px 8px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.fv th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+.fv th.l, .fv td.l { text-align: left; }
+.fv td.name { white-space: normal; min-width: 180px; max-width: 320px; }
+.fv tr.total td { font-weight: var(--cds-font-weight-medium); border-bottom: 2px solid var(--color-border-line); }
+.fv tr.pick { cursor: pointer; }
+.fv tr.pick:hover td { background: var(--color-bg); }
+.fv tr.on td { background: var(--color-bg); box-shadow: inset 0 -1px 0 var(--color-fg-muted); }
+.fv td.good { color: var(--color-ok); }
+.fv td.bad { color: var(--color-bad); }
+.fv details summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+.fv details ul { margin: var(--cds-gap-sm) 0 0; padding-left: 1.2em; line-height: 1.6; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 82ch; }
+.fv-hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--cds-gap-md); }
+.fv-kpi { border-top: 3px solid var(--lee-blue); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.fv-kpi .v { font-family: var(--lee-font); font-weight: 650; letter-spacing: -0.01em; font-size: 1.9rem; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.fv-delta { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.fv-delta.good { color: var(--color-ok); } .fv-delta.bad { color: var(--color-bad); } .fv-delta.flat { color: var(--color-fg-muted); }
+.fv-spark { height: 28px; width: 100%; display: block; }
+.fv-insights { margin: 0; padding-left: 1.2em; line-height: 1.6; max-width: 90ch; }
+.fv-insights li { margin-bottom: 4px; }
+.fv-insights b { font-variant-numeric: tabular-nums; }
+.fv-panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--cds-gap-md); }
+.fv-panel { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; border-top-width: 4px; }
+.fv-panel.good { border-top-color: var(--color-ok); } .fv-panel.warn { border-top-color: var(--color-warn); } .fv-panel.bad { border-top-color: var(--color-bad); } .fv-panel.none { border-top-color: var(--color-border-line); }
+.fv-panel-h { display: flex; justify-content: space-between; align-items: baseline; gap: var(--cds-gap-sm); margin-bottom: var(--cds-gap-sm); }
+.fv-panel-h b { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.fv-light { font-size: var(--cds-font-size-caption); font-weight: 600; padding: 2px 10px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.fv-light.good { color: var(--color-ok); } .fv-light.warn { color: var(--color-warn); } .fv-light.bad { color: var(--color-bad); } .fv-light.none { color: var(--color-fg-muted); }
+.fv-m { display: flex; justify-content: space-between; gap: var(--cds-gap-sm); padding: 6px 0; border-bottom: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); }
+.fv-m span:last-child { font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
+.fv-m .good { color: var(--color-ok); } .fv-m .warn { color: var(--color-warn); } .fv-m .bad { color: var(--color-bad); }
+.fv-verdict { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-sm) 0 0; line-height: 1.5; }
+.fv td.warn { color: var(--color-warn); }
+.fv-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--cds-gap-sm); }
+.fv-col { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); min-width: 0; background: var(--color-bg); }
+.fv-col.end.good { border-color: var(--color-ok); } .fv-col.end.bad { border-color: var(--color-bad); }
+.fv-col-h { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+.fv-col-now { margin: 2px 0 6px; font-variant-numeric: tabular-nums; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.fv-col-now b { font-family: var(--lee-font); font-weight: 650; letter-spacing: -0.01em; font-size: 1.6rem; color: var(--color-fg); }
+.fv-col-r { display: flex; justify-content: space-between; gap: 6px; font-size: 12px; padding: 3px 0; border-top: 1px solid var(--color-border-line); }
+.fv-col-r span:last-child { font-variant-numeric: tabular-nums; font-weight: 600; }
+.fv-col-r .warn { color: var(--color-warn); }
+.fv-tabs { display: flex; gap: 4px; padding: 4px; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: 999px; overflow-x: auto; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; scrollbar-width: none; }
+.fv-tabs button { flex: 1 0 auto; font: inherit; font-size: var(--cds-font-size-body); font-weight: 600; color: var(--color-fg-muted); background: transparent; border: 0; border-radius: 999px; padding: 10px 18px; cursor: pointer; white-space: nowrap; }
+.fv-tabs button:hover { color: var(--color-fg); }
+.fv-tabs button[aria-selected="true"] { background: var(--lee-navy); color: #ffffff; box-shadow: inset 0 -3px 0 var(--lee-lime); }
+.fv-tabs button:focus-visible { outline: 2px solid var(--lee-blue); outline-offset: 2px; }
+.fv-tabpanel { display: flex; flex-direction: column; gap: var(--cds-gap-xl); }
+.fv-tabpanel[hidden] { display: none; }
+.fv-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-lg); }
+.fv h3 { font-size: var(--cds-font-size-body); font-weight: 600; margin: var(--cds-gap-lg) 0 var(--cds-gap-sm); }
+.fv-chain { display: flex; align-items: stretch; overflow-x: auto; }
+.fv-chain-step { flex: 1 1 0; min-width: 120px; background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); }
+.fv-chain-step.last { background: var(--lee-lime); border-color: var(--lee-lime); color: var(--lee-navy); }
+.fv-chain-step.last .fv-lbl, .fv-chain-step.last .fv-small { color: var(--lee-ink); }
+.fv-chain-n { font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.15; margin: 2px 0; }
+.fv-chain-arrow { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; padding: 0 6px; min-width: 64px; }
+.fv-chain-arrow span { font-size: 12px; font-weight: 700; color: var(--lee-navy); background: var(--lee-blue); border-radius: 999px; padding: 3px 8px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { .fv-chain { flex-direction: column; } .fv-chain-arrow { padding: 4px 0; } }
+.fv-kpi.k-good { border-top-color: var(--color-ok); } .fv-kpi.k-warn { border-top-color: var(--color-warn); } .fv-kpi.k-bad { border-top-color: var(--color-bad); }
+.fv th.grp { text-align: center; color: var(--color-fg); border-bottom: 2px solid var(--color-border-line); letter-spacing: .05em; font-size: 11px; text-transform: uppercase; }
+.fv th.gs, .fv td.gs { border-left: 1px solid var(--color-border-line); }
+.fv .stick { position: sticky; left: 0; background: var(--color-panel); z-index: 1; max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+.fv tr.pick:hover td.stick, .fv tr.on td.stick { background: var(--color-bg); }
+.fv td.mut { color: var(--color-fg-muted); }
+.fv td.lt-good { color: var(--color-ok); font-weight: 600; } .fv td.lt-warn { color: var(--color-warn); font-weight: 600; } .fv td.lt-bad { color: var(--color-bad); font-weight: 600; }
+.fv td.strong { font-weight: 700; }
+.fv-daily { margin-top: var(--cds-gap-lg); border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-md); }
+.fv-picked { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+.fv-lb tr.top td { background: color-mix(in srgb, var(--lee-lime) 10%, transparent); }
+.fv-rank { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; font-weight: 700; font-size: 13px; background: var(--color-bg); border: 1px solid var(--color-border-line); color: var(--color-fg); }
+.fv-rank.r1 { background: var(--lee-lime); border-color: var(--lee-lime); color: var(--lee-navy); }
+.fv-rank.r2 { background: var(--lee-blue); border-color: var(--lee-blue); color: var(--lee-navy); }
+.fv-rank.r3 { background: var(--lee-sky); border-color: var(--lee-sky); color: var(--lee-navy); opacity: .85; }
+.fv td.rank { text-align: center; }
+.fv td.speed { min-width: 150px; white-space: nowrap; }
+.fv-speed { display: inline-block; width: 90px; height: 8px; background: var(--color-bg); border-radius: 999px; vertical-align: middle; margin-right: 8px; overflow: hidden; }
+.fv-speedbar { display: block; height: 100%; border-radius: 999px; background: var(--lee-blue); }
+.fv-speedbar.lt-good { background: var(--color-ok); } .fv-speedbar.lt-warn { background: var(--color-warn); } .fv-speedbar.lt-bad { background: var(--color-bad); }
+.fv-speedval { font-variant-numeric: tabular-nums; font-weight: 600; }
+.fv-chart { position: relative; min-height: 200px; }
+.fv-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+.fv-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.fv-legend i.sw-blue { background: var(--lee-blue); } .fv-legend i.sw-lime { background: var(--lee-lime); } .fv-legend i.sw-coral { background: var(--lee-coral); }
+.fv .t-mut { fill: var(--cds-text-secondary); font-size: 12px; }
+.fv-journey { gap: var(--cds-gap-md); }
+.fv-stage { border-top: 0; padding-top: 0; }
+.fv-stage-head { margin-bottom: 8px; }
+.fv-stage-no.t-ads, .fv-step.t-ads .fv-step-bar i { background: var(--lee-blue); }
+.fv-stage-no.t-tunnel, .fv-step.t-tunnel .fv-step-bar i { background: var(--lee-sky); }
+.fv-stage-no.t-quality, .fv-step.t-quality .fv-step-bar i { background: var(--lee-green); }
+.fv-stage-no.t-crm, .fv-step.t-crm .fv-step-bar i { background: var(--lee-blue); }
+.fv-stage-no.t-sales, .fv-step.t-sales .fv-step-bar i { background: var(--lee-lime); }
+.fv-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.fv-step { background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 12px 14px 10px; min-width: 0; display: flex; flex-direction: column; gap: 2px; position: relative; }
+.fv-step-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 22px; }
+.fv-step-l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-weight: 600; }
+.fv-pill { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--lee-navy); background: var(--lee-blue); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.fv-step.t-quality .fv-pill { background: var(--lee-green); }
+.fv-step.t-tunnel .fv-pill { background: var(--lee-sky); }
+.fv-pill.bad { background: var(--lee-coral); color: #fff; }
+.fv-step-n { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; line-height: 1.15; color: var(--color-fg); }
+.fv-step-s { font-size: 12px; color: var(--color-fg-muted); font-variant-numeric: tabular-nums; min-height: 16px; }
+.fv-step-bar { height: 4px; border-radius: 999px; background: var(--color-border-line); margin-top: 8px; overflow: hidden; }
+.fv-step-bar i { display: block; height: 100%; border-radius: 999px; }
+.fv-step.worst { border-color: var(--lee-coral); }
+.fv-step-flag { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--lee-coral); margin-top: 6px; }
+.fv-step.result { background: var(--lee-lime); border-color: var(--lee-lime); }
+.fv-step.result .fv-step-l, .fv-step.result .fv-step-s { color: var(--lee-ink); }
+.fv-step.result .fv-step-n { color: var(--lee-navy); }
+.fv-step.result .fv-pill { background: var(--lee-navy); color: #fff; }
+.fv-step.result .fv-step-bar { background: rgba(4, 13, 27, .15); }
+.fv-step.result .fv-step-bar i { background: var(--lee-navy); }
+.fv-bridge { text-align: left; padding: 0 0 0 2px; }
+[data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="fv">
+  <header id="summary" class="fv-brand">
+    <div class="fv-brand-top"><svg class="fv-logo" xmlns="http://www.w3.org/2000/svg" viewBox="90.49 55.42 433.52 129.75" role="img" aria-label="leeloo.ai"> <path d="M195.155 91.211 L199.705 91.211 C199.310 90.061 198.871 88.928 198.388 87.812 C197.906 86.696 197.381 85.600 196.813 84.525 C196.246 83.449 195.637 82.397 194.988 81.369 C194.339 80.341 193.651 79.339 192.925 78.364 C192.198 77.389 191.435 76.443 190.635 75.528 C189.835 74.612 189.000 73.728 188.132 72.877 C187.264 72.026 186.364 71.209 185.432 70.428 C184.500 69.646 183.540 68.902 182.550 68.195 C181.561 67.488 180.546 66.820 179.505 66.192 C178.464 65.564 177.400 64.976 176.313 64.430 C175.227 63.884 174.121 63.381 172.995 62.921 C171.870 62.461 170.728 62.045 169.570 61.673 C168.412 61.301 167.242 60.975 166.059 60.694 C164.876 60.413 163.683 60.178 162.482 59.989 C161.281 59.800 160.074 59.658 158.862 59.563 C157.650 59.468 156.435 59.420 155.219 59.419 L155.129 59.419 L155.129 63.694 L155.219 63.694 C157.373 63.690 159.515 63.849 161.644 64.170 C163.774 64.491 165.867 64.971 167.924 65.609 C169.981 66.247 171.978 67.036 173.915 67.977 C175.852 68.918 177.707 69.999 179.481 71.221 C181.254 72.443 182.925 73.792 184.494 75.267 C186.063 76.742 187.512 78.327 188.841 80.022 C190.170 81.717 191.364 83.502 192.422 85.377 C193.480 87.253 194.391 89.198 195.155 91.211 Z" fill="currentColor" /> <path d="M201.978 103.175 C200.614 103.402 199.156 103.630 197.702 103.959 C197.702 104.641 197.792 105.413 197.792 106.142 C197.792 125.061 185.252 141.120 168.045 146.622 C167.865 147.167 167.818 147.798 167.591 148.397 C167.363 149.444 167.136 150.443 166.956 151.305 C187.149 146.167 202.068 127.746 202.068 106.142 C202.068 105.084 202.068 104.174 201.978 103.175 Z" fill="currentColor" /> <path d="M115.103 91.211 L110.554 91.211 C110.949 90.061 111.387 88.928 111.870 87.812 C112.353 86.696 112.878 85.600 113.445 84.525 C114.013 83.449 114.621 82.397 115.270 81.369 C115.919 80.341 116.607 79.339 117.334 78.364 C118.061 77.389 118.824 76.443 119.624 75.528 C120.424 74.612 121.258 73.728 122.126 72.877 C122.995 72.026 123.895 71.209 124.826 70.428 C125.758 69.646 126.719 68.902 127.708 68.195 C128.697 67.488 129.713 66.820 130.754 66.192 C131.795 65.564 132.859 64.976 133.945 64.430 C135.032 63.884 136.138 63.381 137.263 62.921 C138.389 62.461 139.531 62.045 140.688 61.673 C141.846 61.301 143.017 60.975 144.200 60.694 C145.383 60.413 146.575 60.178 147.776 59.989 C148.978 59.800 150.184 59.658 151.397 59.563 C152.609 59.468 153.823 59.420 155.039 59.419 L155.129 59.419 L155.129 63.694 L155.039 63.694 C152.885 63.690 150.744 63.849 148.614 64.170 C146.485 64.491 144.392 64.971 142.335 65.609 C140.278 66.247 138.281 67.036 136.344 67.977 C134.406 68.918 132.551 69.999 130.778 71.221 C129.004 72.443 127.333 73.792 125.764 75.267 C124.195 76.742 122.746 78.327 121.417 80.022 C120.088 81.717 118.895 83.502 117.836 85.377 C116.778 87.253 115.867 89.198 115.103 91.211 Z" fill="currentColor" /> <path d="M108.281 103.175 C109.645 103.402 111.102 103.630 112.556 103.959 C112.556 104.641 112.466 105.413 112.466 106.142 C112.466 125.061 125.006 141.120 142.213 146.622 C142.393 147.167 142.440 147.798 142.668 148.397 C142.895 149.444 143.122 150.443 143.303 151.305 C123.109 146.167 108.191 127.746 108.191 106.142 C108.191 105.084 108.191 104.174 108.281 103.175 Z" fill="currentColor" /> <path d="M157.312 114.222 C162.089 111.871 164.636 105.993 165.772 102.305 C167.136 97.301 167.136 93.253 162.951 94.707 C159.032 96.074 157.269 96.165 156.176 101.804 C155.674 104.398 155.266 105.268 155.129 105.487 L155.129 181.173 C155.404 180.672 157.402 176.032 163.543 148.060 C168.182 125.955 166.454 121.907 157.312 114.222 Z" fill="currentColor" /> <path d="M160.224 84.475 C160.229 86.899 159.774 89.233 158.860 91.478 C160.498 91.023 162.179 90.024 162.634 89.432 C163.088 88.978 164.142 85.749 164.142 83.715 C164.091 76.516 160.615 70.603 155.129 70.556 L155.129 84.064 C156.583 84.064 158.041 82.974 159.859 81.289 C160.072 82.341 160.193 83.403 160.224 84.475 Z" fill="currentColor" /> <path d="M171.196 97.038 L171.196 98.085 C171.788 104.355 165.921 104.907 182.521 101.862 C197.894 98.951 215.771 95.592 215.771 95.592 C215.771 95.592 201.307 95.408 185.660 95.408 C174.096 95.389 171.047 94.252 171.196 97.038 Z" fill="currentColor" /> <path d="M152.946 114.222 C148.170 111.871 145.622 105.993 144.486 102.305 C143.122 97.301 143.122 93.253 147.307 94.707 C151.226 96.074 152.990 96.165 154.083 101.804 C154.585 104.398 154.992 105.268 155.129 105.487 L155.129 181.173 C154.855 180.672 152.856 176.032 146.716 148.060 C142.076 125.955 143.804 121.907 152.946 114.222 Z" fill="currentColor" /> <path d="M150.035 84.475 C150.030 86.899 150.484 89.233 151.399 91.478 C149.761 91.023 148.079 90.024 147.625 89.432 C147.170 88.978 146.116 85.749 146.116 83.715 C146.167 76.516 149.643 70.603 155.129 70.556 L155.129 84.064 C153.675 84.064 152.218 82.974 150.399 81.289 C150.187 82.341 150.065 83.403 150.035 84.475 Z" fill="currentColor" /> <path d="M139.062 97.038 L139.062 98.085 C138.471 104.355 144.337 104.907 127.737 101.862 C112.364 98.951 94.487 95.592 94.487 95.592 C94.487 95.592 108.951 95.408 124.598 95.408 C136.163 95.389 139.211 94.252 139.062 97.038 Z" fill="currentColor" /> <path d="M233.780 93.739 L241.021 93.739 L241.021 132.534 C241.021 137.103 241.797 140.552 245.160 141.069 C245.562 141.220 245.964 141.220 246.366 141.069 L247.660 147.535 L243.953 147.535 C239.038 147.535 233.693 143.225 233.693 132.534 L233.780 93.739 Z" fill="currentColor" /> <path d="M339.820 93.739 L347.062 93.739 L347.062 132.534 C347.062 137.103 347.838 140.552 351.200 141.069 C351.602 141.220 352.005 141.220 352.407 141.069 L353.700 147.535 L349.993 147.535 C345.079 147.535 339.734 143.225 339.734 132.534 L339.820 93.739 Z" fill="currentColor" /> <path d="M492.243 123.741 L494.312 123.741 L494.312 122.965 C494.312 116.585 490.605 114.602 485.949 114.602 C483.990 114.637 482.082 114.972 480.227 115.605 C478.373 116.238 476.659 117.139 475.087 118.309 L472.069 112.878 C475.173 110.292 481.035 108.309 486.380 108.309 C495.950 108.309 501.554 113.654 501.554 123.310 L501.554 147.621 L482.501 147.621 C475.862 147.621 469.310 144.259 469.310 137.103 C469.310 125.206 484.311 123.741 492.243 123.741 M483.880 142.966 C486.898 143.483 492.243 143.311 494.398 141.759 L494.398 129.086 L492.415 129.086 C486.984 129.086 476.811 129.431 476.811 136.672 C476.621 139.604 479.139 142.190 483.880 142.966 L483.880 142.966 Z" fill="currentColor" /> <path d="M270.506 107.964 C281.368 107.964 287.231 116.068 287.231 125.982 C287.361 127.017 287.361 128.051 287.231 129.086 L258.953 129.086 C259.298 137.362 265.333 141.845 272.144 141.845 C273.503 141.870 274.851 141.759 276.187 141.511 C277.524 141.263 278.822 140.883 280.081 140.372 C281.341 139.861 282.536 139.228 283.667 138.475 C284.799 137.721 285.843 136.862 286.800 135.897 L286.541 142.707 C282.834 146.070 276.972 148.139 271.713 148.139 C259.816 148.139 251.194 139.345 251.194 127.965 C251.194 115.723 259.557 107.964 270.506 107.964 M279.730 123.741 C279.472 117.102 275.420 113.654 270.420 113.654 C264.643 113.654 260.333 117.361 259.126 123.741 L279.730 123.741 Z" fill="currentColor" /> <path d="M313.681 107.964 C324.543 107.964 330.406 116.068 330.406 125.982 C330.536 127.017 330.536 128.051 330.406 129.086 L301.956 129.086 C302.301 137.362 308.336 141.845 315.146 141.845 C316.505 141.870 317.853 141.759 319.190 141.511 C320.526 141.263 321.824 140.883 323.084 140.372 C324.343 139.861 325.539 139.228 326.670 138.475 C327.801 137.721 328.845 136.862 329.802 135.897 L329.544 142.707 C325.837 146.070 319.974 148.139 314.715 148.139 C302.818 148.139 294.197 139.345 294.197 127.965 C294.473 115.723 302.577 107.964 313.681 107.964 M322.819 123.741 C322.561 117.102 318.509 113.654 313.508 113.654 C307.732 113.654 303.422 117.361 302.215 123.741 L322.819 123.741 Z" fill="currentColor" /> <path d="M376.615 107.964 C388.082 107.964 397.306 116.326 397.306 128.051 C397.306 139.776 388.168 148.139 376.615 148.139 C365.063 148.139 355.925 139.690 355.925 127.965 C356.200 116.413 365.339 107.964 376.615 107.964 M376.615 141.759 C383.771 141.759 389.806 135.897 389.806 127.965 C389.806 120.034 383.857 114.344 376.615 114.344 C369.374 114.344 363.425 120.120 363.425 127.965 C363.615 136.155 369.391 141.759 376.615 141.759 L376.615 141.759 Z" fill="currentColor" /> <path d="M424.480 107.964 C435.946 107.964 445.171 116.326 445.171 128.051 C445.171 139.776 435.946 148.139 424.480 148.139 C413.014 148.139 403.789 139.690 403.789 127.965 C403.789 116.413 413.100 107.964 424.480 107.964 M424.480 141.759 C431.636 141.759 437.671 135.897 437.671 127.965 C437.671 120.034 431.722 114.344 424.480 114.344 C417.238 114.344 411.290 120.120 411.290 127.965 C411.204 136.155 417.066 141.759 424.480 141.759 L424.480 141.759 Z" fill="currentColor" /> <path d="M453.620 139.431 L461.465 139.431 L461.465 147.449 L453.620 147.449 L453.620 139.431 L453.620 139.431 Z" fill="currentColor" /> <path d="M512.416 94.084 L520.003 94.084 L520.003 101.584 L512.416 101.584 L512.416 94.084 M512.503 109.171 L519.727 109.171 L519.727 147.621 L512.485 147.621 L512.503 109.171 Z" fill="currentColor" /> </svg><span class="fv-brand-tag">Аналітика</span></div>
+    <h1>Аналітика: маркетинг і продажі</h1>
+    <p class="fv-lede" data-read lang="uk"><b data-draw="sel-name">—</b>: <b data-draw="v-cash" data-source="sales">—</b> виручки з <b data-draw="v-pays" data-source="sales">—</b> оплат, <b data-draw="v-contacts" data-source="contacts">—</b> нових контактів і <b data-draw="v-leads" data-source="deals">—</b> лідів у планах продажів. Конверсія ліда в продаж <b data-draw="v-conv" data-source="deals">—</b>.</p>
+    <p class="fv-meta">Уся компанія · Leeloo API (угоди всіх планів продажів, історія колонок, оплати, нові контакти) і Meta Ads · знімок {{SNAPSHOT_UA}}</p>
+  </header>
+
+  <section class="fv-card fv-controls" id="controls" aria-label="Що показати">
+    <div class="fv-field">Групувати за
+      <div class="fv-seg" role="group" aria-label="Групувати за">
+        <button type="button" data-by="tunnel" aria-pressed="true">Тунель</button>
+        <button type="button" data-by="lgt" aria-pressed="false">ЛГТ</button>
+      </div>
+    </div>
+    <label class="fv-field" for="f-pick"><span data-draw="pick-label">—</span>
+      <select class="dash-select" id="f-pick" data-draw="pick-select" data-source="deals meta_lgt contacts"></select>
+    </label>
+    <label class="fv-field" for="f-plan">План продажів
+      <select class="dash-select" id="f-plan" data-draw="plan-select" data-source="deals"></select>
+    </label>
+    <label class="fv-field" for="f-status">Статус
+      <select class="dash-select" id="f-status" data-draw="status-select" data-source="deals"></select>
+    </label>
+    <div class="fv-field">Ліди
+      <div class="fv-seg" role="group" aria-label="Які ліди показати">
+        <button type="button" data-sql="" aria-pressed="true">Усі</button>
+        <button type="button" data-sql="1" aria-pressed="false">Лише SQL</button>
+      </div>
+    </div>
+    <label class="fv-field" for="f-from">Від
+      <input type="date" id="f-from" min="{{FROM}}" max="{{TO}}" value="{{FROM}}">
+    </label>
+    <label class="fv-field" for="f-to">До
+      <input type="date" id="f-to" min="{{FROM}}" max="{{TO}}" value="{{TO}}">
+    </label>
+    <div class="fv-presets" role="group" aria-label="Швидкий вибір періоду">
+      <button type="button" class="fv-btn" data-preset="all">Увесь період</button>
+      <button type="button" class="fv-btn" data-preset="90">90 днів</button>
+      <button type="button" class="fv-btn" data-preset="30">30 днів</button>
+      <button type="button" class="fv-btn" data-preset="month">Цей місяць</button>
+    </div>
+    <p class="fv-note" data-draw="status-note" style="flex-basis: 100%; margin: 0"></p>
+  </section>
+
+  <nav class="fv-tabs" role="tablist" aria-label="Розділи дашборда">
+    <button type="button" role="tab" id="t-general" data-tab="general" aria-selected="true" aria-controls="general">Загальний</button>
+    <button type="button" role="tab" id="t-marketing" data-tab="marketing" aria-selected="false" aria-controls="marketing">Маркетинг</button>
+    <button type="button" role="tab" id="t-sales" data-tab="sales" aria-selected="false" aria-controls="sales">Продажі</button>
+    <button type="button" role="tab" id="t-service" data-tab="service" aria-selected="false" aria-controls="service">Клієнт-сервіс</button>
+    <button type="button" role="tab" id="t-alltime" data-tab="alltime" aria-selected="false" aria-controls="alltime">Весь час</button>
+  </nav>
+
+  <section class="fv-tabpanel" id="general" role="tabpanel" aria-labelledby="t-general">
+    <div class="fv-hero" id="hero" aria-label="Головне за період" data-draw="hero" data-source="sales meta_lgt contacts sql deals"></div>
+
+    <div class="fv-card" id="chain">
+      <h2>Від підписки до продажу</h2>
+      <p class="fv-sub">Підписники — люди, які вперше з'явилися в Leeloo за обрані дати. MQL — ті з них, хто має MQL-тег. Ліди — угоди, створені в планах продажів (нові контакти і стара база). SQL — люди з тегом SQL, чия угода дійшла до кваліфікації за обрані дати.</p>
+      <div class="fv-chain" data-draw="chain" data-source="contacts deals sql"></div>
+    </div>
+
+    <div class="fv-panels" id="panels" aria-label="Світлофор: маркетинг і продажі" data-draw="panels" data-source="deals meta_lgt tunnel_stats support"></div>
+
+    <div class="fv-card" id="insights">
+      <h2>Що відбувається</h2>
+      <p class="fv-sub" data-draw="cmp-period">—</p>
+      <ul class="fv-insights" data-draw="insights" data-source="deals meta_lgt"></ul>
+    </div>
+  </section>
+
+  <section class="fv-tabpanel" id="marketing" role="tabpanel" aria-labelledby="t-marketing" hidden>
+    <div class="fv-card" id="funnel">
+      <h2>Воронка: <span data-draw="sel-name">—</span></h2>
+      <p class="fv-sub">Етапи від реклами до оплати. У кожній картці — кількість і перехід з попереднього кроку; ціна за штуку показана там, де всі ліди прийшли з реклами. Червоним позначено крок, де губиться найбільше.</p>
+      <div class="fv-journey" data-draw="journey" data-source="meta_lgt contacts tunnel_stats deals">—</div>
+      <div class="fv-out" data-draw="outcome" data-source="deals meta_lgt"></div>
+    </div>
+
+    <div class="fv-card" id="sync">
+      <h2>Синхрон маркетингу й продажів</h2>
+      <p class="fv-sub">Рядок на рекламну кампанію (ЛГТ з такою самою назвою); «Без реклами» — ліди з решти джерел. Ціни, CAC і ROMI рахуються лише від лідів, що прийшли з реклами. Натисніть на кампанію, щоб побачити її по днях.</p>
+      <div class="fv-tablewrap">
+        <table data-source="meta_lgt deals" aria-label="Синхрон маркетингу й продажів">
+          <thead>
+            <tr>
+              <th class="grp l stick" rowspan="2">Кампанія</th>
+              <th class="grp gs" colspan="8">Facebook</th>
+              <th class="grp gs" colspan="8">Ліди</th>
+              <th class="grp gs" colspan="2">Продажі</th>
+              <th class="grp gs" colspan="4">Показники</th>
+            </tr>
+            <tr>
+              <th class="gs">Витрати</th><th>Покази</th><th>CPM</th><th>Кліки</th><th>CTR</th><th>CPC</th><th>Підписки</th><th>Ціна підп.</th>
+              <th class="gs">Ліди</th><th>Ціна ліда</th><th>MQL</th><th>Квал</th><th>Ціна квал</th><th>Взято</th><th>Прогрів</th><th>ОЖОП</th>
+              <th class="gs">Продажі</th><th>Виручка</th>
+              <th class="gs">Конв. в продаж</th><th>Сер. чек</th><th>CAC</th><th>ROMI</th>
+            </tr>
+          </thead>
+          <tbody data-draw="sync-rows"></tbody>
+        </table>
+      </div>
+      <div class="fv-daily" id="sync-daily">
+        <h3><span data-draw="camp-title">—</span></h3>
+        <div class="fv-picked" data-draw="camp-picked"></div>
+        <div class="fv-tablewrap">
+          <table data-source="meta_lgt deals" aria-label="Кампанія по днях">
+            <thead><tr><th class="l stick">Дата</th><th class="l">День</th><th class="gs">Витрати</th><th>Покази</th><th>Кліки</th><th>CTR</th><th>Підписки</th><th>Ціна підп.</th><th class="gs">Ліди</th><th>MQL</th><th>Квал</th><th>Продажі</th><th>Виручка</th></tr></thead>
+            <tbody data-draw="sync-daily"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="fv-card" id="compare">
+      <h2 data-draw="cmp-title">—</h2>
+      <p class="fv-sub">Натисніть на рядок, щоб побачити його воронку.</p>
+      <div class="fv-tablewrap">
+        <table data-source="deals meta_lgt contacts" aria-label="Порівняння">
+          <thead>
+            <tr>
+              <th class="l" data-draw="cmp-head">—</th>
+              <th>Витрати</th><th>Підписки Meta</th><th>Нові контакти</th><th>Ліди</th><th>Взято</th><th>Квал</th><th>Замовлення</th><th>Продажі</th><th>Лід → продаж</th><th>Виручка лідів</th><th>CAC</th><th>ROMI</th>
+            </tr>
+          </thead>
+          <tbody data-draw="cmp-rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="fv-tabpanel" id="sales" role="tabpanel" aria-labelledby="t-sales" hidden>
+    <div class="fv-hero" data-draw="sales-kpis" data-source="deals"></div>
+
+    <div class="fv-card" id="sql-leads">
+      <h2>SQL-ліди за період: <span data-draw="sql-total" data-source="sql">—</span></h2>
+      <p class="fv-sub">SQL — людина з тегом SQL, чия угода дійшла до кваліфікації за обрані дати (дати самого тега Leeloo не зберігає, тому береться дата кваліфікації). «Без тега» — дійшли до кваліфікації, але тега SQL не мають.</p>
+      <div class="fv-hero" data-draw="sql-kpis" data-source="sql"></div>
+      <div class="fv-two">
+        <div class="fv-tablewrap">
+          <table data-source="sql" aria-label="SQL-ліди за планом продажів">
+            <thead><tr><th class="l">План продажів</th><th>SQL (тег)</th><th>Без тега</th><th>Оплатили</th><th>Виручка</th></tr></thead>
+            <tbody data-draw="sql-plans"></tbody>
+          </table>
+        </div>
+        <div class="fv-tablewrap">
+          <table data-source="sql" aria-label="SQL-ліди за менеджером">
+            <thead><tr><th class="l">Менеджер</th><th>SQL (тег)</th><th>Без тега</th><th>Оплатили</th><th>Виручка</th></tr></thead>
+            <tbody data-draw="sql-managers"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="fv-card" id="payments">
+      <h2>Оплати за період: <span data-draw="pay-total">—</span></h2>
+      <p class="fv-sub">Усі оплачені замовлення компанії за датою оплати. План і менеджер — з останньої угоди покупця, створеної до оплати (не старшої за рік). Тунель — остання підписка покупця перед замовленням. «Нові клієнти» — перша оплата людини.</p>
+      <div class="fv-two">
+        <div class="fv-tablewrap">
+          <table data-source="sales" aria-label="Оплати за планом продажів">
+            <thead><tr><th class="l">План продажів</th><th>Оплат</th><th>Сума</th><th>Нові клієнти</th></tr></thead>
+            <tbody data-draw="pay-plans"></tbody>
+          </table>
+        </div>
+        <div class="fv-tablewrap">
+          <table data-source="sales" aria-label="Оплати за менеджером">
+            <thead><tr><th class="l">Менеджер угоди</th><th>Оплат</th><th>Сума</th><th>Нові клієнти</th></tr></thead>
+            <tbody data-draw="pay-managers"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="fv-two">
+        <div class="fv-tablewrap">
+          <table data-source="sales" aria-label="Оплати за продуктом">
+            <thead><tr><th class="l">Продукт</th><th>Оплат</th><th>Сума</th><th>Нові клієнти</th></tr></thead>
+            <tbody data-draw="pay-products"></tbody>
+          </table>
+        </div>
+        <div class="fv-tablewrap">
+          <table data-source="sales" aria-label="Оплати за тунелем входу">
+            <thead><tr><th class="l">Тунель входу</th><th>Оплат</th><th>Сума</th><th>Нові клієнти</th></tr></thead>
+            <tbody data-draw="pay-tunnels"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="fv-card" id="plans">
+      <h2>Плани продажів</h2>
+      <p class="fv-sub">Ліди — угоди, створені в плані за обрані дати. Натисніть на план, щоб увесь дашборд показував лише його.</p>
+      <div class="fv-tablewrap">
+        <table data-source="deals" aria-label="Плани продажів">
+          <thead><tr><th class="l">План</th><th class="l">Відділ</th><th>Ліди</th><th>У роботі</th><th>Взято</th><th>Квал</th><th>Продажі</th><th>Лід → продаж</th><th>Виручка лідів</th><th>Закрито</th><th>«Немає зв'язку»</th></tr></thead>
+          <tbody data-draw="plans-rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="fv-card" id="leaderboard">
+      <h2>Турнірна таблиця менеджерів</h2>
+      <p class="fv-sub">Усі плани продажів разом (або обраний план). Місце — за кількістю продажів, при рівності — за виручкою. Швидкість — медіана годин від потрапляння ліда в план до «Взято в роботу». Якість — частка взятих лідів, які дійшли до кваліфікації.</p>
+      <div class="fv-tablewrap">
+        <table class="fv-lb" data-source="deals" aria-label="Турнірна таблиця менеджерів">
+          <thead><tr><th>#</th><th class="l">Менеджер</th><th>Лідів</th><th class="l">Швидкість, год</th><th>Взято ≤ 24 год</th><th>Дозвон</th><th>Якість (квал.)</th><th>Продажі</th><th>Лід → продаж</th><th>Виручка</th><th>«Немає зв'язку»</th><th>Зависли</th></tr></thead>
+          <tbody data-draw="leaderboard"></tbody>
+        </table>
+      </div>
+      <p class="fv-note" data-draw="lb-note"></p>
+    </div>
+
+    <div class="fv-card" id="sales-plan">
+      <h2>Етапи планів продажів</h2>
+      <p class="fv-sub">Колонки різних планів зведені до спільних етапів: скільки угод на етапі зараз, скільки пройшли через нього, скільки днів на ньому стоять (медіана) і яка частка йде далі.</p>
+      <div class="fv-board" data-draw="plan-board" data-source="deals">—</div>
+      <h3>Чому угоди закриваються</h3>
+      <div data-draw="plan-reasons" data-source="deals"></div>
+    </div>
+  </section>
+
+  <section class="fv-tabpanel" id="service" role="tabpanel" aria-labelledby="t-service" hidden>
+    <div class="fv-hero" data-draw="sup-kpis" data-source="support"></div>
+
+    <div class="fv-card" id="sup-plans">
+      <h2>Звернення в підтримку за планами</h2>
+      <p class="fv-sub">Звернення — угода, створена в плані підтримки за обрані дати. Закрито — дійшла до останньої колонки плану. Час до закриття — медіана від створення до закриття.</p>
+      <div class="fv-tablewrap">
+        <table data-source="support" aria-label="Звернення в підтримку за планами">
+          <thead><tr><th class="l">План підтримки</th><th>Звернень</th><th>Закрито</th><th>Час до закриття</th><th>Незадовільна оцінка</th><th>Відкриті зараз</th></tr></thead>
+          <tbody data-draw="sup-rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+      </section>
+
+  <section class="fv-tabpanel" id="alltime" role="tabpanel" aria-labelledby="t-alltime" hidden>
+    <p class="fv-note" style="margin-top: 0">Ця вкладка не залежить від фільтрів і дат угорі. Тут усе, що Leeloo віддає за весь час: оплати, тунелі й плани продажів. Воронка по днях, менеджери й причини закриття зібрані з {{FROM_UA}} — на інших вкладках.</p>
+    <div class="fv-hero" data-draw="at-kpis" data-source="at_years at_totals"></div>
+
+    <div class="fv-card" id="at-revenue">
+      <h2>Виручка за місяцями</h2>
+      <p class="fv-sub">Усі оплачені замовлення за датою замовлення. Нові клієнти — перша оплата людини.</p>
+      <div class="fv-legend"><span><i class="sw-blue"></i>Повторні оплати</span><span><i class="sw-lime"></i>Перші оплати нових клієнтів</span></div>
+      <div class="fv-chart" data-draw="at-chart" data-source="at_months">—</div>
+      <div class="fv-tablewrap">
+        <table data-source="at_years" aria-label="Виручка за роками">
+          <thead><tr><th class="l">Рік</th><th>Виручка</th><th>Оплат</th><th>Середній чек</th><th>Клієнтів, що платили</th><th>Нових клієнтів</th><th>Виручка нових</th><th>Реклама Meta</th></tr></thead>
+          <tbody data-draw="at-years"></tbody>
+        </table>
+      </div>
+      <p class="fv-note" data-draw="at-ad-note" data-source="at_totals"></p>
+    </div>
+
+    <div class="fv-card" id="at-products">
+      <h2>Продукти за весь час</h2>
+      <p class="fv-sub">Двадцять продуктів з найбільшою виручкою.</p>
+      <div class="fv-tablewrap">
+        <table data-source="at_products" aria-label="Продукти за весь час">
+          <thead><tr><th class="l">Продукт</th><th>Оплат</th><th>Виручка</th><th>Середній чек</th><th>Роки продажу</th></tr></thead>
+          <tbody data-draw="at-products"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="fv-card" id="at-tunnels">
+      <h2>Тунелі за весь час</h2>
+      <p class="fv-sub">Статистика тунелю з Leeloo: підписники, покупці й сума продажів, як їх рахує платформа. Тридцять тунелів з найбільшою сумою продажів.</p>
+      <div class="fv-tablewrap">
+        <table data-source="at_tunnels" aria-label="Тунелі за весь час">
+          <thead><tr><th class="l">Тунель</th><th>Створено</th><th>Підписники</th><th>Унікальні</th><th>Замовлення</th><th>Покупці</th><th>Підписник → покупець</th><th>Сума продажів</th></tr></thead>
+          <tbody data-draw="at-tunnels"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="fv-card" id="at-plans">
+      <h2>Плани продажів за весь час</h2>
+      <p class="fv-sub">Скільки угод зараз у колонках кожного плану: вхідна колонка, у роботі, остання колонка (успішно завершені) і закриті. Тридцять планів з найбільшою кількістю успішних угод.</p>
+      <div class="fv-tablewrap">
+        <table data-source="at_plans" aria-label="Плани продажів за весь час">
+          <thead><tr><th class="l">План</th><th class="l">Відділ</th><th>Створено</th><th>Угод</th><th>У вхідній колонці</th><th>У роботі</th><th>Успішно</th><th>Закрито</th><th>Успішних від угод</th></tr></thead>
+          <tbody data-draw="at-plans"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <details class="fv-card" id="notes">
+    <summary>Як рахуються показники</summary>
+    <ul>
+      <li>Дашборд охоплює всю компанію з {{FROM_UA}}: усі плани продажів, у яких цього року створено хоча б одну угоду, усі оплачені замовлення і всі нові контакти. Тестові плани та плани-приклади не враховані.</li>
+      <li>Виручка і продажі — усі оплачені замовлення (RESOLVED) за датою оплати. Суми в доларах, EUR за курсом 1,162, яким Leeloo рахує суму плану. «Нові клієнти» — перша оплата людини.</li>
+      <li>План і менеджер оплати — з останньої угоди покупця, створеної не пізніше ніж через день після оплати і не старшої за рік. Якщо такої немає — «Без угоди за останній рік» (здебільшого повторні оплати чинних клієнтів).</li>
+      <li>Підписники (нові контакти) — люди, створені в Leeloo за обрані дати. MQL, Royal / Super MQL, вебінар, заявка на розбір — за тегами людини (теги — поточний стан, без дати; теги розсилок дожиму не враховуються). Тунель і ЛГТ контакту — його перша підписка.</li>
+      <li>Ліди — угоди, створені в планах продажів за обрані дати. Одна людина може мати угоди в кількох планах. Тунель і ЛГТ ліда — остання підписка (не через системний ЛГТ) перед створенням угоди.</li>
+      <li>Відділи визначені за назвами планів: підтримка, акаунт-відділ, решта — відділ продажів. Плани підтримки показані лише на вкладці «Клієнт-сервіс».</li>
+      <li>Етапи CRM. Колонки планів зведені до спільних етапів за назвами: взято в роботу, дозвон, кваліфікація, прогрів або продаж, очікування оплати, платіж отримано. Лід, який дійшов до пізнішого етапу, врахований і в попередніх. Етап береться з історії угоди.</li>
+      <li>SQL — людина з тегом SQL (будь-який тег зі словом SQL), чия угода дійшла до колонки кваліфікації. Leeloo не зберігає дату призначення тега, тому датою «став SQL» вважається перший перехід угоди в кваліфікацію; людина рахується один раз. Перемикач «Лише SQL» лишає в дашборді тільки такі угоди.</li>
+      <li>Продаж ліда — оплата, віднесена до цієї угоди (кожна оплата належить лише одній угоді людини). «Виручка лідів» — оплати лідів обраного періоду, тому вона менша за загальну виручку.</li>
+      <li>Реклама — {{AD_NOTE}} Витрати зібрані за місяцями й рівномірно розкладені по днях місяця. Кампанія зіставлена з ЛГТ з такою самою назвою, а через ЛГТ — з тунелем. CAC = витрати / продажі лідів з реклами. ROMI = (виручка лідів з реклами − витрати) / витрати.</li>
+      <li>Тунель у воронці — охоплення ЛГТ, кліки й підписки зі статистики тунелю Leeloo. API віддає їх лише за весь час, тому блок не змінюється від дат.</li>
+      <li>«Немає зв'язку» — закриті з причинами «нет связи», «неправильный номер», «пропал», «сброс после приветствия» та подібними.</li>
+      <li>Зміна в картках «Головне» — проти попереднього періоду такої самої довжини в межах зібраних даних.</li>
+      <li>Світлофори — орієнтири за замовчуванням: реклама — ROMI (≥ 0% зелений, від −50% жовтий), тунель — частка лідів, що дійшли до кваліфікації (≥ 25% / ≥ 15%), плани продажів — конверсія ліда в продаж (≥ 5% / ≥ 3%), відділ продажів — медіана годин до взяття в роботу (≤ 2 / ≤ 24) і частка закриттів «немає зв'язку» (≤ 30% / ≤ 50%), клієнт-сервіс — частка закритих звернень (≥ 80% / ≥ 60%) і незадовільних оцінок (≤ 5% / ≤ 15%). Їх можна змінити під клієнта.</li>
+      <li>Вкладка «Весь час»: оплати — усі замовлення зі статусом «оплачено» з 2016 року за датою замовлення; тунелі й плани — поточні лічильники Leeloo без дат. Воронка по днях зібрана з {{FROM_UA}}; дуже давні періоди зібрати не можна: списки людей і угод у колонці Leeloo віддає лише до 10 000 останніх записів. Реклама Meta — за період, який віддає Meta (до 37 місяців).</li>
+      <li>Сторінка — знімок на {{SNAPSHOT_UA}} і сама не оновлюється.</li>
+    </ul>
+  </details>
+</div>
+
+<script>
+const L = d3.formatLocale({ decimal: ",", thousands: " ", grouping: [3], currency: ["$", ""] });
+const okn = (v) => v != null && v !== "" && isFinite(+v);
+window.fvF = {
+  int: (v) => (okn(v) ? L.format(",.0f")(+v) : "—"),
+  usd: (v) => (okn(v) ? L.format("$,.0f")(+v) : "—"),
+  usd2: (v) => (okn(v) ? L.format("$,.2f")(+v) : "—"),
+  pct: (v) => (okn(v) ? L.format(",.1f")(+v * 100) + "%" : "—"),
+  pct0: (v) => (okn(v) ? L.format(",.0f")(+v * 100) + "%" : "—"),
+};
+const DEF = { by: "tunnel", pick: "", from: "{{FROM}}", to: "{{TO}}" };
+const div = (a, b) => (b ? a / b : null);
+const STEPS = [
+  ["leads", "Ліди"], ["taken", "Взято в роботу"], ["dozvon", "Дозвон"], ["qual", "Кваліфікація"],
+  ["progrev", "Прогрів"], ["ozhop", "Очікування оплати"], ["paid", "Продаж"],
+];
+
+// Скрипти виконуються кожен у своїй області: спільне — лише через window
+window.div = div;
+// Палітра Leeloo для графіків: синій — шлях, салатовий — результат
+window.LC = ["var(--lee-blue)", "var(--lee-lime)", "var(--lee-sky)", "var(--lee-green)"];
+window.L = L;
+// Орієнтири світлофорів за замовчуванням — змінюються під клієнта
+window.FV_T = { romi: [0, -0.5], qual: [0.25, 0.15], sale: [0.05, 0.03], takenH: [2, 24], noContact: [0.3, 0.5], svcAnswered: [0.9, 0.75], svcMin: [15, 60], supDone: [0.8, 0.6], supBad: [0.05, 0.15] };
+window.STEPS = STEPS;
+window.fv = {
+  STEPS,
+  params() { const p = dash.params() || {}; return { by: p.by === "lgt" ? "lgt" : "tunnel", pick: p.pick || "", plan: p.plan || "", status: p.status || "", sql: p.sql ? "1" : "", from: p.from || DEF.from, to: p.to || DEF.to }; },
+  rows(id) { const r = dash.data(id); return r && r.status === "ok" && Array.isArray(r.data) ? r.data : null; },
+  failed(...ids) { return ids.some((id) => dash.data(id).status === "error"); },
+  data(from, to) {
+    const d = fv.rows("deals"), m = fv.rows("meta_lgt");
+    if (!d || !m) return null;
+    const p = { ...fv.params() };
+    if (from) { p.from = from; p.to = to; }
+    const inR = (x) => x.date >= p.from && x.date <= p.to;
+    // План і статус стосуються лише угод: витрати реклами не діляться за статусами
+    // «@Відділ» у фільтрі плану означає всі плани цього відділу
+    const inP = (x) => !p.plan || (p.plan[0] === "@" ? x.dept === p.plan.slice(1) : x.plan === p.plan);
+    const inS = (x) => inP(x) && (!p.status || x.status === p.status) && (!p.sql || +x.sql);
+    const sv = fv.rows("service"), sl = fv.rows("sales"), ct = fv.rows("contacts"), su = fv.rows("support"), sq = fv.rows("sql");
+    return { p, deals: d.filter((x) => inR(x) && inS(x)), meta: m.filter(inR), tstats: fv.rows("tunnel_stats"),
+      svc: sv ? sv.filter((x) => inR(x) && (!p.plan || p.plan[0] === "@" || x.plan === p.plan)) : null,
+      sales: sl ? sl.filter((x) => inR(x) && inP(x)) : null,
+      sq: sq ? sq.filter((x) => inR(x) && inP(x) && (!p.status || x.status === p.status)) : null,
+      ct: ct ? ct.filter(inR) : null, sup: su ? su.filter(inR) : null };
+  },
+  prev() {
+    // Попередній період такої самої довжини; null, якщо він раніше за початок даних
+    const p = fv.params();
+    if (p.from <= DEF.from) return null;
+    const day = 864e5, f = Date.parse(p.from + "T00:00:00Z"), t = Date.parse(p.to + "T00:00:00Z");
+    const len = Math.round((t - f) / day) + 1;
+    const iso = (x) => new Date(x).toISOString().slice(0, 10);
+    const pf = iso(f - len * day), pt = iso(f - day);
+    if (pf < DEF.from) return null;
+    return { from: pf, to: pt, f: fv.data(pf, pt) };
+  },
+  sub(f, rows) { const { by, pick } = f.p; return pick ? rows.filter((r) => r[by] === pick) : rows; },
+  tunnelBlock(f) {
+    // Статистика тунелю за весь час: для обраного тунелю або сума по тунелях, які є серед лідів/реклами
+    if (!f.tstats || f.p.by === "lgt") return null;
+    // Обраний тунель; для «усіх» — тунелі, куди йде реклама з блоку 1 (інакше великі органічні тунелі перекривають усе)
+    const adT = [...new Set(f.meta.map((m) => m.tunnel))];
+    const names = f.p.pick ? [f.p.pick] : adT.length ? adT : [...new Set(f.deals.map((d) => d.tunnel))];
+    const rows = f.tstats.filter((t) => names.includes(t.tunnel));
+    if (!rows.length) return null;
+    const s = (k) => rows.reduce((a, r) => a + (+r[k] || 0), 0);
+    return { tunnels: rows.length, reaches: s("uniqReaches"), clicks: s("uniqClicks"), subscribers: s("subscribers"), uniq: s("uniqSubscribers"), orders: s("orders"), sales: s("uniqSales"), total: s("totalSale") };
+  },
+  // ЛГТ, на які йшла реклама Meta: лише їхні ліди порівнюємо з витратами
+  adSet() { const m = fv.rows("meta_lgt") || []; if (fv._ad && fv._ad.m === m) return fv._ad.s; fv._ad = { m, s: new Set(m.map((x) => x.lgt)) }; return fv._ad.s; },
+  agg(deals, meta) {
+    const a = { spend: 0, impressions: 0, clicks: 0, subs: 0, leads: 0, taken: 0, dozvon: 0, qual: 0, progrev: 0, ozhop: 0, paid: 0, closed: 0, revenue: 0, days: [],
+      ordered: 0, beh_known: 0, tag_known: 0, replied: 0, mql: 0, royal: 0, webinar: 0, razbor: 0, crm_replied: 0, manager_wrote: 0, bot_msgs: 0, newcontact: 0,
+      taken_hs: [], taken24: 0, no_contact: 0, open: 0, stuck: 0, crm_rep_paid: 0, crm_norep_paid: 0, crm_norep: 0, ad_leads: 0, ad_paid: 0, ad_rev: 0, ad_qual: 0 };
+    const ad = fv.adSet();
+    meta.forEach((m) => { a.spend += +m.spend || 0; a.impressions += +m.impressions || 0; a.clicks += +m.clicks || 0; a.subs += +m.subs || 0; });
+    deals.forEach((d) => {
+      a.leads += 1; for (const k of ["taken", "dozvon", "qual", "progrev", "ozhop", "paid", "closed", "ordered", "newcontact"]) a[k] += +d[k] || 0;
+      if (d.mql != null) { a.tag_known += 1; for (const k of ["mql", "royal", "webinar", "razbor"]) a[k] += +d[k] || 0; }
+      if (d.replied != null) { a.beh_known += 1; for (const k of ["replied", "crm_replied", "manager_wrote", "bot_msgs"]) a[k] += +d[k] || 0; }
+      a.revenue += +d.revenue || 0; if (+d.paid && d.days_to_pay != null) a.days.push(+d.days_to_pay);
+      if (ad.has(d.lgt)) { a.ad_leads += 1; a.ad_paid += +d.paid || 0; a.ad_rev += +d.revenue || 0; a.ad_qual += +d.qual || 0; }
+      if (d.taken_h != null) { a.taken_hs.push(+d.taken_h); if (+d.taken_h <= 24) a.taken24 += 1; }
+      a.no_contact += +d.no_contact || 0; a.open += +d.open || 0; if (+d.open && +d.idle_days > 14) a.stuck += 1;
+      if (d.crm_replied != null) { if (+d.crm_replied) a.crm_rep_paid += +d.paid || 0; else { a.crm_norep += 1; a.crm_norep_paid += +d.paid || 0; } }
+    });
+    a.taken_hs.sort((x, y) => x - y);
+    a.taken_med = a.taken_hs.length ? a.taken_hs[a.taken_hs.length >> 1] : null;
+    a.days.sort((x, y) => x - y);
+    a.median_days = a.days.length ? (a.days.length % 2 ? a.days[a.days.length >> 1] : (a.days[a.days.length / 2 - 1] + a.days[a.days.length / 2]) / 2) : null;
+    a.conv = div(a.paid, a.leads); a.check = div(a.revenue, a.paid);
+    // Реклама: витрати порівнюються лише з лідами, що прийшли через рекламні ЛГТ
+    a.cac = a.spend ? div(a.spend, a.ad_paid) : null;
+    a.romi = a.spend ? (a.ad_rev - a.spend) / a.spend : null;
+    return a;
+  },
+  // SQL за тегом: люди з тегом SQL, які дійшли до кваліфікації за період
+  sqN(f) { return fv.sub(f, f.sq || []).filter((x) => +x.tagged).length; },
+  // Нові контакти: скільки, з якими позначками, скільки стали лідами й оплатили
+  ct(rows) {
+    const c = { n: rows.length, mql: 0, royal: 0, webinar: 0, razbor: 0, lead: 0, paid: 0, usd: 0 };
+    rows.forEach((r) => { for (const k of ["mql", "royal", "webinar", "razbor", "lead", "paid", "usd"]) c[k] += +r[k] || 0; });
+    return c;
+  },
+  selected(f) {
+    const { by, pick } = f.p;
+    const deals = pick ? f.deals.filter((d) => d[by] === pick) : f.deals;
+    const meta = pick ? f.meta.filter((m) => m[by] === pick) : f.meta;
+    return fv.agg(deals, meta);
+  },
+  groups(f) {
+    const by = f.p.by, g = new Map();
+    const get = (k) => (g.has(k) ? g.get(k) : (g.set(k, { deals: [], meta: [], ct: 0 }), g.get(k)));
+    f.deals.forEach((d) => get(d[by]).deals.push(d));
+    f.meta.forEach((m) => get(m[by]).meta.push(m));
+    (f.ct || []).forEach((c) => { if (g.has(c[by])) g.get(c[by]).ct += 1; });
+    return [...g.entries()].map(([name, x]) => ({ name, contacts: x.ct, ...fv.agg(x.deals, x.meta) }))
+      .filter((r) => r.leads || r.spend)
+      .sort((a, b) => b.leads - a.leads || b.spend - a.spend);
+  },
+};
+
+(function () {
+  const segs = document.querySelectorAll("[data-by]");
+  segs.forEach((b) => b.addEventListener("click", () => dash.setParams({ by: b.getAttribute("data-by"), pick: null })));
+  const sqs = document.querySelectorAll("[data-sql]");
+  sqs.forEach((b) => b.addEventListener("click", () => dash.setParams({ sql: b.getAttribute("data-sql") || null })));
+  const from = document.getElementById("f-from"), to = document.getElementById("f-to");
+  const take = (el, key) => {
+    if (!(el && el.value && el.validity.valid)) return;
+    const p = fv.params(), n = { from: p.from, to: p.to, [key]: el.value };
+    if (n.from > n.to) { if (key === "from") n.to = el.value; else n.from = el.value; }
+    dash.setParams(n);
+  };
+  const sync = () => {
+    const p = fv.params();
+    if (from && document.activeElement !== from) from.value = p.from;
+    if (to && document.activeElement !== to) to.value = p.to;
+    segs.forEach((b) => b.setAttribute("aria-pressed", String(b.getAttribute("data-by") === p.by)));
+    sqs.forEach((b) => b.setAttribute("aria-pressed", String(b.getAttribute("data-sql") === p.sql)));
+  };
+  if (from) { from.addEventListener("change", () => take(from, "from")); from.addEventListener("blur", sync); }
+  if (to) { to.addEventListener("change", () => take(to, "to")); to.addEventListener("blur", sync); }
+  const iso = (d) => d.toISOString().slice(0, 10);
+  document.querySelectorAll("[data-preset]").forEach((b) => b.addEventListener("click", () => {
+    const k = b.getAttribute("data-preset"), end = new Date(DEF.to + "T00:00:00Z");
+    let f = DEF.from;
+    if (k === "30" || k === "90") { const s = new Date(end); s.setUTCDate(s.getUTCDate() - (+k - 1)); f = iso(s); }
+    if (k === "month") f = DEF.to.slice(0, 8) + "01";
+    dash.setParams({ from: f, to: DEF.to });
+  }));
+  dash.onData(sync);
+})();
+</script>
+
+<script>
+const allName = () => (fv.params().by === "lgt" ? "Усі ЛГТ" : "Усі тунелі");
+
+dash.draw("sel-name", (el) => { const p = fv.params(); el.textContent = p.pick || allName(); });
+dash.draw("pick-label", (el) => { el.textContent = fv.params().by === "lgt" ? "ЛГТ" : "Тунель"; });
+dash.draw("cmp-title", (el) => { el.textContent = fv.params().by === "lgt" ? "Порівняння ЛГТ" : "Порівняння тунелів"; });
+dash.draw("cmp-head", (el) => { el.textContent = fv.params().by === "lgt" ? "ЛГТ" : "Тунель"; });
+
+dash.draw("pick-select", (sel) => {
+  const f = fv.data();
+  const p = fv.params();
+  const names = f ? fv.groups(f).map((g) => g.name) : [];
+  if (p.pick && !names.includes(p.pick)) names.unshift(p.pick);
+  sel.replaceChildren(new Option(allName(), ""), ...names.map((n) => new Option(n, n)));
+  sel.value = p.pick;
+  sel.onchange = () => dash.setParams({ pick: sel.value || null });
+});
+
+const lede = (name, fn) => dash.draw(name, (el) => { const f = fv.data(); el.textContent = f ? fn(fv.selected(f)) : "—"; });
+lede("v-leads", (a) => fvF.int(a.leads));
+lede("v-conv", (a) => fvF.pct(a.conv));
+const ledeF = (name, fn) => dash.draw(name, (el) => { const f = fv.data(); el.textContent = f ? fn(f) : "—"; });
+ledeF("v-cash", (f) => (f.sales ? fvF.usd(fv.sub(f, f.sales).reduce((s, x) => s + (+x.usd || 0), 0)) : "—"));
+ledeF("v-pays", (f) => (f.sales ? fvF.int(fv.sub(f, f.sales).length) : "—"));
+ledeF("v-contacts", (f) => (f.ct ? fvF.int(fv.sub(f, f.ct).length) : "—"));
+
+function stat(label, value, small) {
+  const box = document.createElement("div"); box.className = "fv-ad";
+  const l = document.createElement("div"); l.className = "fv-lbl"; l.textContent = label;
+  const v = document.createElement("div"); v.className = "fv-num"; v.textContent = value;
+  box.append(l, v);
+  if (small) { const s = document.createElement("div"); s.className = "fv-small"; s.textContent = small; box.append(s); }
+  return box;
+}
+
+window.fvTip = function (box) {
+  const tip = document.createElement("div"); tip.className = "fv-tip"; tip.hidden = true; box.append(tip);
+  return {
+    show(ev, title, sub) {
+      tip.replaceChildren();
+      const b = document.createElement("div"); b.textContent = title;
+      const s = document.createElement("span"); s.textContent = sub;
+      tip.append(b, s); tip.hidden = false;
+      const br = box.getBoundingClientRect();
+      tip.style.left = Math.max(0, Math.min(ev.clientX - br.left + 12, br.width - tip.offsetWidth)) + "px";
+      tip.style.top = Math.max(0, ev.clientY - br.top - 52) + "px";
+    },
+    hide() { tip.hidden = true; },
+  };
+};
+
+// Одна довга воронка з п'яти етапів. Кожен етап має свій масштаб (перша сходинка = повна ширина),
+// між етапами — «місток» з переходом.
+// Воронка у вигляді карток: кожен етап — рядок карток-кроків.
+// У картці: назва, велике число, перехід з попереднього кроку (плашка), ціна за штуку і тонка смужка частки від першого кроку етапу.
+// Воронка у вигляді карток: кожен етап — рядок карток-кроків.
+// У картці: назва, велике число, перехід з попереднього кроку (плашка), ціна за штуку і тонка смужка частки від першого кроку етапу.
+dash.draw("journey", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) { el.textContent = fv.failed("deals", "meta_lgt") ? "Не вдалося завантажити" : "—"; return; }
+  const a = fv.selected(f);
+  const tb = fv.tunnelBlock(f);
+  const c = fv.ct(fv.sub(f, f.ct || []));
+  // Ціну кроку показуємо, лише коли всі ліди вибору прийшли з реклами: інакше витрати діляться на чужих лідів
+  const sp = a.spend && a.leads && a.ad_leads === a.leads ? a.spend : null;
+  let no = 0;
+
+  function stage(title, tag, tone, steps, opts = {}) {
+    const box = el_("div", "fv-stage");
+    const head = el_("div", "fv-stage-head");
+    head.append(el_("span", "fv-stage-no t-" + tone, String(++no)), el_("span", "fv-stage-title", title));
+    if (tag) head.append(el_("span", "fv-stage-tag", tag));
+    box.append(head);
+    if (!steps) { box.append(el_("div", "fv-empty", opts.empty || "Немає даних.")); return box; }
+    const base = opts.base ?? steps[0].n;
+    // найслабший перехід етапу — лише для послідовних кроків з достатньою кількістю
+    let worst = -1;
+    if (opts.flagWorst) { let min = Infinity; steps.forEach((s, i) => { if (i && steps[i - 1].n >= 5) { const r = s.n / steps[i - 1].n; if (r < min) { min = r; worst = i; } } }); if (steps.length < 3) worst = -1; }
+    const grid = el_("div", "fv-steps");
+    steps.forEach((s, i) => {
+      const card = el_("div", "fv-step t-" + tone + (s.result ? " result" : "") + (i === worst ? " worst" : ""));
+      const top = el_("div", "fv-step-top");
+      top.append(el_("span", "fv-step-l", s.label));
+      const prev = i ? steps[i - 1].n : null;
+      // signals: кожна картка — частка від першої (позначки не йдуть одна за одною)
+      const r = !i ? null : opts.signals ? (base ? s.n / base : null) : prev ? s.n / prev : null;
+      if (r != null) top.append(el_("span", "fv-pill" + (i === worst ? " bad" : ""), fvF.pct(r)));
+      card.append(top, el_("div", "fv-step-n", fvF.int(s.n)));
+      const sub = [s.cost != null ? fvF.usd2(s.cost) + " за шт" : "", s.extra || ""].filter(Boolean).join(" · ");
+      card.append(el_("div", "fv-step-s", sub || (!i ? "старт етапу" : opts.signals ? "від нових контактів" : "з попереднього кроку")));
+      const track = el_("div", "fv-step-bar"); const fill = el_("i");
+      fill.style.width = (base ? Math.max(2, Math.min(100, (s.n / base) * 100)) : 0) + "%";
+      track.append(fill); card.append(track);
+      if (i === worst) card.append(el_("div", "fv-step-flag", "найбільша втрата"));
+      grid.append(card);
+    });
+    box.append(grid);
+    if (opts.note) box.append(el_("div", "fv-empty", opts.note));
+    return box;
+  }
+  const bridge = (text) => el_("div", "fv-bridge", "↓ " + text);
+
+  // Реклама Meta
+  const metaSteps = a.impressions || a.spend ? [
+    { label: "Покази", n: a.impressions, extra: "CPM " + fvF.usd2(div(a.spend, a.impressions / 1000)) },
+    { label: "Кліки", n: a.clicks, cost: div(a.spend, a.clicks) },
+    { label: "Підписки (піксель)", n: a.subs, cost: div(a.spend, a.subs) },
+  ] : null;
+  el.append(stage("Реклама Meta", a.spend ? "витрати " + fvF.usd(a.spend) + " · за обрані дати" : "за обрані дати", "ads", metaSteps, { empty: "Реклами в Meta на цей вибір немає." }));
+
+  // Тунель: статистика Leeloo за весь час (лише там, де вона зібрана)
+  if (tb) {
+    el.append(stage("Тунель", "за весь час · тунелів: " + fvF.int(tb.tunnels), "tunnel", [
+      { label: "Охоплення ЛГТ", n: tb.reaches },
+      { label: "Кліки на ЛГТ", n: tb.clicks },
+      { label: "Підписки", n: tb.subscribers, extra: fvF.int(tb.uniq) + " унікальних" },
+    ]));
+  }
+
+  // Нові контакти та їхня якість
+  const cSteps = c.n ? [
+    { label: "Нові контакти", n: c.n },
+    { label: "MQL", n: c.mql }, { label: "Royal / Super MQL", n: c.royal }, { label: "Заявка на розбір", n: c.razbor },
+    { label: "Вебінар", n: c.webinar }, { label: "Стали лідами", n: c.lead }, { label: "Оплатили", n: c.paid, extra: c.usd ? fvF.usd(c.usd) : "" },
+  ] : null;
+  el.append(stage("Нові контакти", "за обрані дати · позначки — за тегами", "quality", cSteps, { signals: true, base: c.n, empty: "Нових контактів за цей період немає." }));
+
+  // CRM
+  el.append(bridge(`${fvF.int(a.leads)} лідів створено в планах продажів за обрані дати: ${fvF.int(a.newcontact)} — нові контакти, решта — база`));
+  const crm = a.leads ? [
+    { label: "Ліди", n: a.leads, cost: sp && div(sp, a.leads) },
+    { label: "Взято в роботу", n: a.taken, cost: sp && div(sp, a.taken) },
+    { label: "Дозвон", n: a.dozvon, cost: sp && div(sp, a.dozvon) },
+    { label: "Кваліфікація", n: a.qual, cost: sp && div(sp, a.qual) },
+    { label: "Прогрів / продаж", n: a.progrev, cost: sp && div(sp, a.progrev) },
+    { label: "Очікування оплати", n: a.ozhop, cost: sp && div(sp, a.ozhop) },
+  ] : null;
+  el.append(stage("CRM", a.taken_med != null ? "медіана до взяття в роботу — " + fvF.int(a.taken_med) + " год" : "", "crm", crm, { flagWorst: true, empty: "За цей період лідів немає." }));
+
+  // Продажі
+  const sales = a.leads ? [
+    { label: "Замовлення створено", n: a.ordered, cost: sp && div(sp, a.ordered) },
+    { label: "Оплачено", n: a.paid, cost: sp && div(sp, a.paid), extra: fvF.pct(div(a.paid, a.leads)) + " від лідів", result: true },
+  ] : null;
+  el.append(stage("Продажі лідів періоду", a.revenue ? "виручка " + fvF.usd(a.revenue) : "", "sales", sales, { empty: "Продажів немає." }));
+});
+
+dash.draw("outcome", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) return;
+  const a = fv.selected(f);
+  const romi = a.romi;
+  const r = stat("ROMI", fvF.pct0(romi), a.spend ? "виручка лідів з реклами " + fvF.usd(a.ad_rev) + " при витратах " + fvF.usd(a.spend) : "без витрат на рекламу");
+  if (romi != null) r.querySelector(".fv-num").style.color = romi >= 0 ? "var(--color-ok)" : "var(--color-bad)";
+  el.append(
+    stat("Виручка лідів", fvF.usd(a.revenue)),
+    stat("Середній чек", fvF.usd(a.check)),
+    stat("CAC", fvF.usd(a.cac), "витрати на продаж з реклами"),
+    r,
+    stat("До оплати", a.median_days != null ? fvF.int(a.median_days) + " дн." : "—", "медіана від потрапляння в план"),
+  );
+});
+
+dash.draw("closed-note", (el) => {
+  const f = fv.data();
+  if (!f) { el.textContent = ""; return; }
+  const p = f.p;
+  const deals = p.pick ? f.deals.filter((d) => d[p.by] === p.pick) : f.deals;
+  const closed = deals.filter((d) => +d.closed);
+  if (!closed.length) { el.textContent = ""; return; }
+  const m = new Map(); closed.forEach((d) => m.set(d.reason || "Без причини", (m.get(d.reason || "Без причини") || 0) + 1));
+  const top = [...m.entries()].sort((x, y) => y[1] - x[1]).slice(0, 3);
+  el.textContent = `Закрито ${fvF.int(closed.length)} з ${fvF.int(deals.length)} лідів. Найчастіші причини: ` + top.map(([k, v]) => `«${k}» (${fvF.int(v)})`).join(", ") + ".";
+});
+
+dash.draw("cmp-rows", (tb) => {
+  const f = fv.data();
+  if (!f) { tb.replaceChildren(); return; }
+  const p = f.p;
+  const td = (t, c) => { const e = document.createElement("td"); if (c) e.className = c; e.textContent = t; return e; };
+  const cells = (tr, a) => {
+    const rc = a.romi == null ? "" : a.romi >= 0 ? "good" : "bad";
+    tr.append(td(a.spend ? fvF.usd(a.spend) : "—"), td(a.spend ? fvF.int(a.subs) : "—"), td(fvF.int(a.contacts)), td(fvF.int(a.leads)), td(fvF.int(a.taken)), td(fvF.int(a.qual)), td(fvF.int(a.ordered)), td(fvF.int(a.paid)),
+      td(fvF.pct(a.conv)), td(fvF.usd(a.revenue)), td(fvF.usd(a.cac)), td(fvF.pct0(a.romi), rc));
+  };
+  const total = document.createElement("tr"); total.className = "total" + (p.pick ? " pick" : " on");
+  total.append(td(allName(), "l name")); cells(total, Object.assign(fv.agg(f.deals, f.meta), { contacts: (f.ct || []).length }));
+  if (p.pick) { total.tabIndex = 0; total.onclick = () => dash.setParams({ pick: null }); }
+  tb.replaceChildren(total, ...fv.groups(f).map((g) => {
+    const tr = document.createElement("tr");
+    tr.className = "pick" + (g.name === p.pick ? " on" : "");
+    tr.tabIndex = 0;
+    tr.setAttribute("aria-label", "Показати воронку: " + g.name);
+    tr.append(td(g.name, "l name")); cells(tr, g);
+    const go = () => { dash.setParams({ pick: g.name === p.pick ? null : g.name }); const s = document.getElementById("funnel"); if (s && g.name !== p.pick) s.scrollIntoView({ behavior: "smooth", block: "start" }); };
+    tr.onclick = go;
+    tr.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+    return tr;
+  }));
+});
+
+// ——— Головне: 6 карток зі зміною проти попереднього періоду і тижневим трендом ———
+const light = (v, [good, warn], lowerBetter = false) => {
+  if (v == null || !isFinite(v)) return "none";
+  return lowerBetter ? (v <= good ? "good" : v <= warn ? "warn" : "bad") : (v >= good ? "good" : v >= warn ? "warn" : "bad");
+};
+const el_ = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+function weekly(f, fn) {
+  const wk = (s) => { const t = new Date(s + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() - ((t.getUTCDay() + 6) % 7)); return t.toISOString().slice(0, 10); };
+  const g = new Map(), get = (k) => (g.has(k) ? g.get(k) : (g.set(k, { deals: [], meta: [], cash: 0, cashN: 0, ctN: 0, ctMql: 0, sqN: 0 }), g.get(k)));
+  fv.sub(f, f.deals).forEach((d) => get(wk(d.date)).deals.push(d));
+  fv.sub(f, f.meta).forEach((m) => get(wk(m.date)).meta.push(m));
+  fv.sub(f, f.sales || []).forEach((s) => { const o = get(wk(s.date)); o.cash += +s.usd || 0; o.cashN += 1; });
+  fv.sub(f, f.ct || []).forEach((c) => { const o = get(wk(c.date)); o.ctN += 1; o.ctMql += +c.mql || 0; });
+  fv.sub(f, f.sq || []).forEach((r) => { if (+r.tagged) get(wk(r.date)).sqN += 1; });
+  return [...g.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([, x]) => fn(Object.assign(fv.agg(x.deals, x.meta), { cash: x.cash, cashN: x.cashN, ctN: x.ctN, ctMql: x.ctMql, sqN: x.sqN })));
+}
+
+function spark(values) {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("class", "fv-spark"); svg.setAttribute("viewBox", "0 0 100 28"); svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("aria-hidden", "true");
+  const v = values.filter((x) => x != null && isFinite(x));
+  if (v.length < 2) return svg;
+  const max = Math.max(...v), min = Math.min(0, ...v), n = values.length;
+  const pts = values.map((x, i) => [(i / (n - 1)) * 100, 26 - ((((x ?? 0) - min) / ((max - min) || 1)) * 24)]);
+  const path = document.createElementNS(NS, "path");
+  path.setAttribute("d", "M" + pts.map((p) => p.map((c) => c.toFixed(1)).join(",")).join(" L"));
+  path.setAttribute("fill", "none"); path.setAttribute("stroke-width", "1.5"); path.setAttribute("vector-effect", "non-scaling-stroke");
+  path.style.stroke = LC[0];
+  const dot = document.createElementNS(NS, "circle");
+  const last = pts[pts.length - 1];
+  dot.setAttribute("cx", last[0]); dot.setAttribute("cy", last[1]); dot.setAttribute("r", "2"); dot.style.fill = LC[0];
+  svg.append(path, dot);
+  return svg;
+}
+
+dash.draw("hero", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) { el.textContent = fv.failed("deals", "meta_lgt") ? "Не вдалося завантажити" : "—"; return; }
+  const a = fv.selected(f);
+  const pv = fv.prev();
+  const b = pv && pv.f ? fv.selected(pv.f) : null;
+  // Виручка і продажі — усі оплати за датою оплати; підписники й MQL — нові контакти за датою створення
+  const cashOf = (ff) => { const r = fv.sub(ff, ff.sales || []); const nw = r.filter((x) => +x.newc); return { sum: r.reduce((s, x) => s + (+x.usd || 0), 0), n: r.length, newN: nw.length, newSum: nw.reduce((s, x) => s + (+x.usd || 0), 0) }; };
+  const c1 = cashOf(f), c0 = pv && pv.f ? cashOf(pv.f) : null;
+  const k1 = fv.ct(fv.sub(f, f.ct || [])), k0 = pv && pv.f ? fv.ct(fv.sub(pv.f, pv.f.ct || [])) : null;
+  const cards = [
+    ["Виручка", c1.sum, c0 && c0.sum, fvF.usd, 1, (x) => x.cash, "нові клієнти " + fvF.usd(c1.newSum)],
+    ["Рекламний бюджет", a.spend, b && b.spend, fvF.usd, 0, (x) => x.spend, "Meta Ads"],
+    ["Підписники", k1.n, k0 && k0.n, fvF.int, 1, (x) => x.ctN, "нові контакти"],
+    ["Ліди MQL", k1.mql, k0 && k0.mql, fvF.int, 1, (x) => x.ctMql, fvF.pct0(div(k1.mql, k1.n)) + " нових контактів"],
+    ["Ліди SQL", fv.sqN(f), pv && pv.f ? fv.sqN(pv.f) : null, fvF.int, 1, (x) => x.sqN, "за тегом · ще " + fvF.int(fv.sub(f, f.sq || []).length - fv.sqN(f)) + " у кваліфікації без тега"],
+    ["Продажі", c1.n, c0 && c0.n, fvF.int, 1, (x) => x.cashN, "оплат · нових клієнтів " + fvF.int(c1.newN)],
+  ];
+  cards.forEach(([label, v, pvv, fmt, dir, pick, note]) => {
+    const c = el_("div", "fv-kpi");
+    c.append(el_("div", "fv-lbl", label), el_("div", "v", fmt(v)));
+    let txt = "немає попереднього періоду", cls = "flat";
+    if (pvv != null && isFinite(pvv) && v != null && isFinite(v)) {
+      const ratio = pvv ? (v - pvv) / Math.abs(pvv) : null;
+      const diff = v - pvv;
+      txt = (diff > 0 ? "▲ " : diff < 0 ? "▼ " : "■ ") + (ratio != null ? fvF.pct0(Math.abs(ratio)) : fmt(Math.abs(diff))) + " до попер. періоду";
+      cls = dir === 0 || diff === 0 ? "flat" : (diff > 0) === (dir > 0) ? "good" : "bad";
+    }
+    c.append(el_("div", "fv-delta " + cls, txt));
+    if (note) c.append(el_("div", "fv-small", note));
+    c.append(spark(weekly(f, pick)));
+    el.append(c);
+  });
+});
+
+dash.draw("cmp-period", (el) => {
+  const p = fv.params(), pv = fv.prev();
+  const fmt = (s) => s.split("-").reverse().join(".");
+  el.textContent = `Період ${fmt(p.from)}–${fmt(p.to)}` + (pv ? `, порівняння з ${fmt(pv.from)}–${fmt(pv.to)}.` : ". Щоб побачити зміни, оберіть коротший період.") + " Висновки рахуються автоматично з даних.";
+});
+
+// ——— Що відбувається: автоматичні висновки ———
+dash.draw("insights", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) return;
+  const a = fv.selected(f);
+  const out = [];
+  const li = (...parts) => { const x = el_("li"); parts.forEach((p) => x.append(typeof p === "string" ? document.createTextNode(p) : p)); out.push(x); };
+  const B = (t) => el_("b", null, t);
+  if (!a.leads) { li("За обраний період лідів у планах продажів немає."); el.append(...out); return; }
+
+  // 1. Де найбільше втрачаємо в CRM
+  const st = [["Ліди", a.leads], ["Взято в роботу", a.taken], ["Дозвон", a.dozvon], ["Кваліфікація", a.qual], ["Прогрів", a.progrev], ["Очікування оплати", a.ozhop], ["Оплата", a.paid]];
+  let worst = null;
+  for (let i = 1; i < st.length; i++) { const r = div(st[i][1], st[i - 1][1]); if (st[i - 1][1] >= 5 && r != null && (!worst || r < worst.r)) worst = { r, from: st[i - 1][0], to: st[i][0] }; }
+  if (worst) li("Найбільше лідів губиться між «", B(worst.from), "» і «", B(worst.to), "»: далі проходить лише ", B(fvF.pct0(worst.r)), ".");
+
+  // 2. Реклама: найкраща і найгірша кампанія
+  const lg = new Map();
+  fv.sub(f, f.meta).forEach((m) => { const o = lg.get(m.lgt) || { meta: [], deals: [] }; o.meta.push(m); lg.set(m.lgt, o); });
+  fv.sub(f, f.deals).forEach((d) => { if (lg.has(d.lgt)) lg.get(d.lgt).deals.push(d); });
+  const camps = [...lg.entries()].map(([n, x]) => ({ n, ...fv.agg(x.deals, x.meta) })).filter((c) => c.spend >= 100);
+  if (camps.length >= 2) {
+    camps.sort((x, y) => (y.romi ?? -9) - (x.romi ?? -9));
+    const best = camps[0], bad = camps[camps.length - 1];
+    li((best.romi != null && best.romi >= 0 ? "Найкраща реклама" : "Усі кампанії збиткові; найменше втрачає") + " — «", B(best.n), "»: ", B(fvF.usd(best.spend)), " → ", B(fvF.usd(best.revenue)), " виручки (ROMI ", B(fvF.pct0(best.romi)), "). Найслабша — «", B(bad.n), "»: ", B(fvF.usd(bad.spend)), ", продажів ", B(fvF.int(bad.paid)), ".");
+  } else if (a.spend) {
+    li("Витрати на рекламу ", B(fvF.usd(a.spend)), ", ціна ліда з реклами ", B(fvF.usd2(div(a.spend, a.ad_leads))), ", ROMI ", B(fvF.pct0(a.romi)), ".");
+  }
+
+  // 3. Ціна ліда проти попереднього періоду
+  const pv = fv.prev();
+  if (pv && pv.f && a.spend) {
+    const b = fv.selected(pv.f), c1 = div(a.spend, a.ad_leads), c0 = div(b.spend, b.ad_leads);
+    if (c1 != null && c0 != null) li("Ціна ліда з реклами ", B(fvF.usd2(c1)), (c1 > c0 ? " — дорожче" : " — дешевше"), " за попередній період (", B(fvF.usd2(c0)), ").");
+  }
+
+  // 4. Відділ продажів: дозвон і швидкість
+  const nc = div(a.no_contact, a.closed);
+  if (a.closed >= 5 && nc != null) li(B(fvF.pct0(nc)), " закритих угод — «немає зв'язку» (не дозвонилися, неправильний номер, пропав). " + (nc > FV_T.noContact[0] ? "Це питання дозвону й швидкості, а не якості лідів." : ""));
+  const mg = new Map();
+  fv.sub(f, f.deals).forEach((d) => { if (d.manager === "Не призначено") return; const o = mg.get(d.manager) || []; o.push(d); mg.set(d.manager, o); });
+  const ms = [...mg.entries()].map(([n, l]) => ({ n, ...fv.agg(l, []) })).filter((m) => m.leads >= 10 && m.taken_med != null).sort((x, y) => x.taken_med - y.taken_med);
+  if (ms.length >= 2) li("Найшвидше бере ліди в роботу ", B(ms[0].n), " (медіана ", B(fvF.int(ms[0].taken_med)), " год), найповільніше — ", B(ms[ms.length - 1].n), " (", B(fvF.int(ms[ms.length - 1].taken_med)), " год).");
+  else if (a.taken_med != null) li("Медіана часу до взяття в роботу — ", B(fvF.int(a.taken_med)), " год.");
+
+  // 5. Відповідь менеджеру і продажі
+  const kn = a.beh_known;
+  if (kn >= 100 && a.crm_rep_paid >= 5 && a.crm_norep_paid >= 5) {
+    const r1 = div(a.crm_rep_paid, a.crm_replied), r0 = div(a.crm_norep_paid, a.crm_norep);
+    if (r1 != null && r0) li("Ліди, які відповіли менеджеру в чаті, купують у ", B(L.format(",.1f")(r1 / r0)), " раза частіше (", B(fvF.pct(r1)), " проти ", B(fvF.pct(r0)), ").");
+  }
+
+  // 6. Зависли
+  if (a.stuck) li(B(fvF.int(a.stuck)), " відкритих угод стоять без руху понад 14 днів — варто розібрати.");
+  el.append(...out);
+});
+
+// ——— Три панелі ефективності ———
+dash.draw("panels", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) return;
+  const a = fv.selected(f), tb = fv.tunnelBlock(f);
+  const panel = (title, status, label, rows, verdict) => {
+    const p = el_("div", "fv-panel " + status);
+    const hd = el_("div", "fv-panel-h"); hd.append(el_("b", null, title), el_("span", "fv-light " + status, label)); p.append(hd);
+    rows.forEach(([k, v, cls]) => { const r = el_("div", "fv-m"); r.append(el_("span", null, k), el_("span", cls || null, v)); p.append(r); });
+    p.append(el_("p", "fv-verdict", verdict));
+    return p;
+  };
+  const word = { good: "Добре", warn: "Увага", bad: "Погано", none: "Немає даних" };
+
+  // Реклама
+  const sR = a.spend ? light(a.romi, FV_T.romi) : "none";
+  el.append(panel("Реклама", sR, word[sR], [
+    ["Витрати", fvF.usd(a.spend)], ["Ціна підписки", fvF.usd2(div(a.spend, a.subs))], ["Лідів з реклами", fvF.int(a.ad_leads)], ["Ціна ліда з реклами", fvF.usd2(div(a.spend, a.ad_leads))],
+    ["CAC (ціна продажу)", fvF.usd(a.cac)], ["ROMI", fvF.pct0(a.romi), sR],
+  ], !a.spend ? "На цей вибір реклами в Meta немає." : a.romi >= 0 ? "Реклама окупається: виручка від її лідів більша за витрати." : "Реклама поки не окупається: виручка від її лідів менша за витрати. Перевірте кампанії з найгіршим ROMI нижче."));
+
+  // Тунель
+  const qr = div(a.qual, a.leads), sT = a.leads ? light(qr, FV_T.qual) : "none";
+  const rows = [];
+  if (tb) rows.push(["Клік на ЛГТ → підписка (весь час)", fvF.pct(div(tb.subscribers, tb.clicks))]);
+  rows.push(["Ліди з MQL-тегом", a.tag_known ? fvF.pct(div(a.mql, a.tag_known)) : "—"], ["Royal / Super MQL", a.tag_known ? fvF.pct(div(a.royal, a.tag_known)) : "—"],
+    ["Лід → кваліфікація", fvF.pct(qr), sT], ["Лід → продаж", fvF.pct(div(a.paid, a.leads))]);
+  el.append(panel("Тунель", sT, word[sT], rows, !a.leads ? "Лідів за цей період немає." : sT === "good" ? "Тунель приводить якісних лідів: значна частина доходить до кваліфікації." : "Мало лідів доходить до кваліфікації: перевірте прогрів у тунелі та сегмент реклами."));
+
+  // План продажів
+  const conv = div(a.paid, a.leads), sP = a.leads ? light(conv, FV_T.sale) : "none";
+  const pc = a.leads ? fvPlan(fv.sub(f, f.deals)) : [];
+  const dP = (k) => { const c = pc.find((x) => x.key === k); return c && c.days != null ? (c.days < 1 ? "< 1" : L.format(",.1f")(c.days)) + " дн." : "—"; };
+  el.append(panel("Плани продажів", sP, word[sP], [
+    ["Лідів у планах", fvF.int(a.leads)], ["Зараз у роботі", fvF.int(a.open)],
+    ["Квал → очікування оплати", fvF.pct0(div(a.ozhop, a.qual))], ["Час у «Прогріві» (медіана)", dP("progrev")],
+    ["Лід → продаж", fvF.pct(conv), sP],
+  ], !a.leads ? "Лідів за цей період немає." : sP === "good" ? "Плани продажів добре конвертують лідів в оплату." : "Угоди просідають у середині плану: перевірте етапи кваліфікації й прогріву на вкладці «Продажі»."));
+
+  // Відділ продажів
+  const nc = div(a.no_contact, a.closed);
+  const s1 = light(a.taken_med, FV_T.takenH, true), s2 = a.closed >= 5 ? light(nc, FV_T.noContact, true) : "none";
+  const rank = { none: 0, good: 1, warn: 2, bad: 3 };
+  const sO = a.leads ? [s1, s2].sort((x, y) => rank[y] - rank[x])[0] : "none";
+  el.append(panel("Відділ продажів", sO, word[sO], [
+    ["Год до взяття в роботу (медіана)", a.taken_med != null ? fvF.int(a.taken_med) : "—", s1], ["Взято ≤ 24 год", fvF.pct(div(a.taken24, a.taken))],
+    ["Дозвонилися", fvF.pct(div(a.dozvon, a.taken))], ["Закрито «немає зв'язку»", fvF.pct(nc), s2], ["Зависли > 14 днів", fvF.int(a.stuck), a.stuck ? "warn" : null],
+  ], !a.leads ? "Лідів за цей період немає." : sO === "good" ? "Відділ продажів швидко бере ліди й дозвонюється." : "Ліди беруть у роботу повільно або не можуть дозвонитися — це головний резерв конверсії."));
+  // Клієнт-сервіс: звернення в планах підтримки
+  if (f.sup) {
+    const sv = fvSup(f.sup);
+    const a1 = light(div(sv.done, sv.n), FV_T.supDone), a2 = light(div(sv.bad, sv.n), FV_T.supBad, true);
+    const sS = sv.n ? [a1, a2].sort((x, y) => rank[y] - rank[x])[0] : "none";
+    el.append(panel("Клієнт-сервіс", sS, word[sS], [
+      ["Звернень у підтримку", fvF.int(sv.n)], ["Закрито", fvF.pct(div(sv.done, sv.n)), a1],
+      ["Час до закриття (медіана)", fmtMin(sv.med == null ? null : sv.med * 60)], ["Незадовільна оцінка", fvF.pct(div(sv.bad, sv.n)), a2], ["Відкриті зараз", fvF.int(sv.open), sv.open ? "warn" : null],
+    ], !sv.n ? "Звернень у підтримку за цей період немає." : sS === "good" ? "Звернення закривають, незадовільних оцінок мало." : "Частина звернень лишається відкритою або отримує незадовільну оцінку."));
+  }
+});
+
+// ——— Таблиця менеджерів ———
+dash.draw("mgr-rows", (tb) => {
+  const f = fv.data();
+  if (!f) { tb.replaceChildren(); return; }
+  const mg = new Map();
+  fv.sub(f, f.deals).forEach((d) => { const o = mg.get(d.manager) || []; o.push(d); mg.set(d.manager, o); });
+  const td = (t, c) => { const e = document.createElement("td"); if (c && c !== "none") e.className = c; e.textContent = t; return e; };
+  const row = (name, a, cls) => {
+    const tr = document.createElement("tr"); if (cls) tr.className = cls;
+    const nc = div(a.no_contact, a.closed);
+    tr.append(td(name, "l name"), td(fvF.int(a.leads)), td(a.taken_med != null ? fvF.int(a.taken_med) : "—", light(a.taken_med, FV_T.takenH, true)),
+      td(fvF.pct0(div(a.taken24, a.taken))), td(fvF.pct0(div(a.dozvon, a.taken))), td(fvF.pct0(div(a.qual, a.taken))), td(fvF.int(a.paid)),
+      td(fvF.pct(div(a.paid, a.leads))), td(fvF.usd(a.revenue)), td(fvF.pct0(nc), a.closed >= 5 ? light(nc, FV_T.noContact, true) : null),
+      td(fvF.int(a.open)), td(fvF.int(a.stuck), a.stuck ? "warn" : null));
+    return tr;
+  };
+  const list = [...mg.entries()].map(([n, l]) => ({ n, a: fv.agg(l, []) })).sort((x, y) => y.a.leads - x.a.leads);
+  tb.replaceChildren(row("Усі менеджери", fv.agg(fv.sub(f, f.deals), []), "total"), ...list.map((m) => row(m.n, m.a)));
+});
+
+// ——— План продажів: колонки плану ———
+const PLAN_COLS = [
+  { key: "entry", label: "Нові (вхідні колонки)", reached: "leads", days: "d_entry" },
+  { key: "taken", label: "Взято в роботу", reached: "taken", days: "d_taken" },
+  { key: "dozvon", label: "Дозвон", reached: "dozvon", days: "d_dozvon" },
+  { key: "qual", label: "Кваліфікація", reached: "qual", days: "d_qual" },
+  { key: "progrev", label: "Прогрів / продаж", reached: "progrev", days: "d_progrev" },
+  { key: "ozhop", label: "Очікування оплати", reached: "ozhop", days: "d_ozhop" },
+  { key: "won", label: "Платіж отримано", reached: "won", days: null, end: "good" },
+  { key: "closed", label: "Закриті", reached: "closed", days: null, end: "bad" },
+];
+window.PLAN_COLS = PLAN_COLS;
+
+window.fvPlan = function (deals) {
+  const med = (a) => { const s = a.filter((x) => x != null && isFinite(x)).sort((x, y) => x - y); return s.length ? s[s.length >> 1] : null; };
+  return PLAN_COLS.map((c) => {
+    const now = deals.filter((d) => d.stage === c.key);
+    const reached = c.key === "entry" ? deals.length : c.key === "closed" ? deals.filter((d) => +d.closed).length : deals.filter((d) => +d[c.reached]).length;
+    return { ...c, now: now.length, stuck: now.filter((d) => +d.open && +d.idle_days > 14).length, reached, days: c.days ? med(deals.map((d) => d[c.days])) : null };
+  });
+};
+
+dash.draw("plan-board", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) { el.textContent = fv.failed("deals") ? "Не вдалося завантажити" : "—"; return; }
+  const deals = fv.sub(f, f.deals);
+  if (!deals.length) { el.textContent = "За цей період угод немає."; return; }
+  const cols = fvPlan(deals);
+  const main = cols.filter((c) => !c.end);
+  cols.forEach((c, i) => {
+    const card = el_("div", "fv-col" + (c.end ? " end " + c.end : ""));
+    card.append(el_("div", "fv-col-h", c.label));
+    const now = el_("div", "fv-col-now"); now.append(el_("b", null, fvF.int(c.now)), el_("span", null, c.end ? " угод" : " зараз"));
+    card.append(now);
+    const rows = [["Пройшли", fvF.int(c.reached)]];
+    if (c.days != null) rows.push(["Днів у колонці", c.days < 1 ? "< 1" : L.format(",.1f")(c.days)]);
+    const nextMain = main[main.indexOf(c) + 1];
+    if (!c.end && nextMain) rows.push(["Далі проходить", fvF.pct0(div(nextMain.reached, c.reached))]);
+    if (c.key === "ozhop") rows.push(["Далі проходить", fvF.pct0(div(cols.find((x) => x.key === "won").reached, c.reached))]);
+    if (c.stuck) rows.push(["Зависли > 14 дн.", fvF.int(c.stuck), "warn"]);
+    rows.forEach(([k, v, cls]) => { const r = el_("div", "fv-col-r"); r.append(el_("span", null, k), el_("span", cls || null, v)); card.append(r); });
+    el.append(card);
+  });
+});
+
+dash.draw("plan-reasons", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) return;
+  const closed = fv.sub(f, f.deals).filter((d) => +d.closed);
+  if (!closed.length) { el.textContent = "Закритих угод за цей період немає."; return; }
+  const m = new Map();
+  closed.forEach((d) => m.set(d.reason || "Без причини", (m.get(d.reason || "Без причини") || 0) + 1));
+  const rows = [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 7);
+  const max = rows[0][1];
+  rows.forEach(([k, n]) => {
+    const r = el_("div", "fv-row");
+    const tr = el_("div", "fv-track left");
+    const bar = el_("div", "fv-bar sig" + ((n / max) * 100 < 12 ? " out" : ""), fvF.int(n));
+    const w = (n / max) * 100;
+    bar.style.width = w < 12 ? "auto" : w + "%";
+    bar.style.background = w < 12 ? "transparent" : "var(--cds-chart-muted)";
+    if (w < 12) { bar.style.borderLeft = "6px solid var(--cds-chart-muted)"; bar.style.paddingLeft = "6px"; }
+    bar.style.color = "var(--color-fg)";
+    tr.append(bar);
+    r.append(el_("div", "fv-row-l", k), tr, el_("div", "fv-row-r", fvF.pct0(div(n, closed.length)) + " закритих"));
+    el.append(r);
+  });
+});
+
+// ——— Фільтри «План продажів» і «Статус» ———
+dash.draw("plan-select", (sel) => {
+  const d = fv.rows("deals") || [];
+  const p = fv.params();
+  const byDept = new Map();
+  d.forEach((r) => { if (!r.plan) return; const k = r.dept || "Плани"; const m = byDept.get(k) || new Map(); m.set(r.plan, (m.get(r.plan) || 0) + 1); byDept.set(k, m); });
+  const opts = [new Option("Усі плани", "")], vals = [""];
+  [...byDept.entries()].sort((a, b) => b[1].size - a[1].size).forEach(([dept, m]) => {
+    const g = document.createElement("optgroup"); g.label = dept;
+    if (byDept.size > 1) { g.append(new Option(dept + " — усі плани", "@" + dept)); vals.push("@" + dept); }
+    [...m.entries()].sort((a, b) => b[1] - a[1]).forEach(([n, c]) => { g.append(new Option(n + " · " + fvF.int(c), n)); vals.push(n); });
+    opts.push(g);
+  });
+  sel.replaceChildren(...opts);
+  sel.value = vals.includes(p.plan) ? p.plan : "";
+  sel.onchange = () => dash.setParams({ plan: sel.value || null, status: null });
+});
+
+dash.draw("status-select", (sel) => {
+  const d = fv.rows("deals") || [];
+  const p = fv.params();
+  // Статуси в кожного плану свої, тож список з'являється після вибору плану
+  if (!p.plan || p.plan[0] === "@") { sel.replaceChildren(new Option("Оберіть план", "")); sel.value = ""; sel.disabled = true; sel.onchange = null; return; }
+  sel.disabled = false;
+  const base = d.filter((r) => r.date >= p.from && r.date <= p.to && r.plan === p.plan && (!p.pick || r[p.by] === p.pick));
+  const m = new Map();
+  base.forEach((r) => { const o = m.get(r.status) || { n: 0, ord: +r.status_order || 99 }; o.n += 1; m.set(r.status, o); });
+  const list = [...m.entries()].sort((a, b) => a[1].ord - b[1].ord);
+  if (p.status && !m.has(p.status)) list.push([p.status, { n: 0, ord: 999 }]);
+  sel.replaceChildren(new Option("Усі статуси", ""), ...list.map(([st, o]) => new Option(st + " · " + fvF.int(o.n), st)));
+  sel.value = p.status;
+  sel.onchange = () => dash.setParams({ status: sel.value || null });
+});
+
+dash.draw("status-note", (el) => {
+  const p = fv.params();
+  const t = [];
+  if (p.plan) t.push("План стосується угод і оплат; підписники, MQL і витрати реклами від плану не залежать.");
+  if (p.status) t.push("Показано угоди, які зараз у статусі «" + p.status + "».");
+  if (p.sql) t.push("Показано лише ліди з тегом SQL, які дійшли до кваліфікації.");
+  el.textContent = t.join(" ");
+});
+
+// ——— Вкладки: скрипт лише слухає і ставить hidden / aria-selected ———
+(function () {
+  const ids = ["general", "marketing", "sales", "service", "alltime"];
+  const show = (id, link) => {
+    if (!ids.includes(id)) id = "general";
+    document.querySelectorAll("[data-tab]").forEach((b) => b.setAttribute("aria-selected", String(b.getAttribute("data-tab") === id)));
+    ids.forEach((x) => { const s = document.getElementById(x); if (s) s.hidden = x !== id; });
+    if (link) dash.setLink(id);
+  };
+  document.querySelectorAll("[data-tab]").forEach((b) => {
+    b.addEventListener("click", () => show(b.getAttribute("data-tab"), true));
+    b.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      const i = ids.indexOf(b.getAttribute("data-tab")), n = ids[(i + (e.key === "ArrowRight" ? 1 : ids.length - 1)) % ids.length];
+      show(n, true); const t = document.querySelector(`[data-tab="${n}"]`); if (t) t.focus();
+    });
+  });
+  show((location.hash || "").replace("#", ""), false);
+  window.addEventListener("hashchange", () => show((location.hash || "").replace("#", ""), false));
+})();
+
+// ——— Загальний: ланцюжок конверсій ———
+dash.draw("chain", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) { el.textContent = "—"; return; }
+  const a = fv.selected(f);
+  const c = fv.ct(fv.sub(f, f.ct || []));
+  const steps = [
+    ["Підписники", c.n, "нові контакти", null],
+    ["MQL", c.mql, "нові контакти з MQL-тегом", div(c.mql, c.n)],
+    ["Ліди", a.leads, fvF.int(a.newcontact) + " — нові контакти, решта — база", null],
+    ["SQL", fv.sqN(f), "тег SQL і кваліфікація за період", div(fv.sqN(f), a.leads)],
+    ["Продажі лідів", a.paid, fvF.usd(a.revenue) + " виручки", null],
+  ];
+  steps.forEach(([label, n, hint, r], i) => {
+    if (i) {
+      const ar = el_("div", "fv-chain-arrow");
+      ar.append(el_("span", null, r != null ? fvF.pct(r) : "→"));
+      if (i === 2) ar.title = "Ліди — це угоди в планах продажів: серед них є і нові контакти, і стара база";
+      if (i === 4) ar.title = "Продажі рахуються по всіх лідах періоду, не лише по SQL";
+      el.append(ar);
+    }
+    const box = el_("div", "fv-chain-step" + (i === steps.length - 1 ? " last" : ""));
+    box.append(el_("div", "fv-lbl", label), el_("div", "fv-chain-n", fvF.int(n)), el_("div", "fv-small", hint));
+    el.append(box);
+  });
+});
+
+// ——— Маркетинг: синхрон по кампаніях і по днях ———
+const NO_AD = "Без реклами";
+function syncGroups(f) {
+  const ads = new Set(f.meta.map((m) => m.lgt));
+  const g = new Map(), get = (k) => (g.has(k) ? g.get(k) : (g.set(k, { meta: [], deals: [] }), g.get(k)));
+  fv.sub(f, f.meta).forEach((m) => get(m.lgt).meta.push(m));
+  fv.sub(f, f.deals).forEach((d) => get(ads.has(d.lgt) ? d.lgt : NO_AD).deals.push(d));
+  return [...g.entries()].map(([name, x]) => ({ name, ...fv.agg(x.deals, x.meta) }))
+    .filter((r) => r.spend || r.leads)
+    .sort((a, b) => (a.name === NO_AD) - (b.name === NO_AD) || b.spend - a.spend);
+}
+function syncCells(tr, r) {
+  const td = (t, c) => { const e = document.createElement("td"); if (c && c !== "none") e.className = c; e.textContent = t; return e; };
+  tr.append(
+    td(fvF.usd(r.spend), "gs"), td(fvF.int(r.impressions)), td(fvF.usd2(div(r.spend, r.impressions / 1000))), td(fvF.int(r.clicks)),
+    td(fvF.pct(div(r.clicks, r.impressions))), td(fvF.usd2(div(r.spend, r.clicks))), td(fvF.int(r.subs)), td(fvF.usd2(div(r.spend, r.subs))),
+    td(fvF.int(r.leads), "gs"), td(r.spend ? fvF.usd2(div(r.spend, r.ad_leads)) : "—"), td(r.tag_known ? fvF.int(r.mql) : "—"), td(fvF.int(r.qual)), td(r.spend ? fvF.usd(div(r.spend, r.ad_qual)) : "—"),
+    td(fvF.int(r.taken)), td(fvF.int(r.progrev)), td(fvF.int(r.ozhop)),
+    td(fvF.int(r.paid), "gs"), td(fvF.usd(r.revenue)),
+    td(fvF.pct(div(r.paid, r.taken)), "gs"), td(fvF.usd(r.check)), td(fvF.usd(r.cac)), td(fvF.pct0(r.romi), r.spend ? "lt-" + light(r.romi, FV_T.romi) : null),
+  );
+}
+dash.draw("sync-rows", (tb) => {
+  const f = fv.data();
+  if (!f) { tb.replaceChildren(); return; }
+  const camp = (dash.params() || {}).camp || "";
+  const total = document.createElement("tr"); total.className = "total";
+  const t0 = document.createElement("td"); t0.className = "l stick"; t0.textContent = "Разом";
+  total.append(t0); syncCells(total, fv.agg(fv.sub(f, f.deals), fv.sub(f, f.meta)));
+  tb.replaceChildren(total, ...syncGroups(f).map((r) => {
+    const tr = document.createElement("tr");
+    tr.className = "pick" + (r.name === camp ? " on" : "");
+    tr.tabIndex = 0;
+    tr.setAttribute("aria-label", "Показати по днях: " + r.name);
+    const c = document.createElement("td"); c.className = "l stick"; c.textContent = r.name; c.title = r.name;
+    tr.append(c); syncCells(tr, r);
+    const go = () => { dash.setParams({ camp: r.name === camp ? null : r.name }); const s = document.getElementById("sync-daily"); if (s && r.name !== camp) s.scrollIntoView({ behavior: "smooth", block: "start" }); };
+    tr.onclick = go;
+    tr.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+    return tr;
+  }));
+});
+dash.draw("camp-title", (el) => { const c = (dash.params() || {}).camp; el.textContent = c ? "По днях: " + c : "По днях: усі кампанії"; });
+dash.draw("camp-picked", (el) => {
+  const c = (dash.params() || {}).camp;
+  el.replaceChildren();
+  if (!c) { el.textContent = "Натисніть на кампанію в таблиці вище, щоб побачити тільки її."; return; }
+  const b = el_("button", "fv-btn", "Показати всі кампанії"); b.type = "button"; b.onclick = () => dash.setParams({ camp: null });
+  el.append(b);
+});
+dash.draw("sync-daily", (tb) => {
+  const f = fv.data();
+  if (!f) { tb.replaceChildren(); return; }
+  const camp = (dash.params() || {}).camp || "";
+  const ads = new Set(f.meta.map((m) => m.lgt));
+  const meta = fv.sub(f, f.meta).filter((m) => !camp || m.lgt === camp);
+  const deals = fv.sub(f, f.deals).filter((d) => !camp || (camp === NO_AD ? !ads.has(d.lgt) : d.lgt === camp));
+  const g = new Map(), get = (k) => (g.has(k) ? g.get(k) : (g.set(k, { meta: [], deals: [] }), g.get(k)));
+  meta.forEach((m) => get(m.date).meta.push(m));
+  deals.forEach((d) => get(d.date).deals.push(d));
+  const days = [...g.entries()].sort(([x], [y]) => y.localeCompare(x)).map(([date, x]) => ({ date, ...fv.agg(x.deals, x.meta) })).filter((r) => r.spend || r.leads || r.impressions);
+  const start = camp && camp !== NO_AD ? (fv.rows("meta_lgt") || []).filter((m) => m.lgt === camp && (+m.spend || +m.impressions)).map((m) => m.date).sort()[0] : null;
+  const td = (t, c) => { const e = document.createElement("td"); if (c) e.className = c; e.textContent = t; return e; };
+  const fmtD = (s) => s.split("-").reverse().join(".");
+  tb.replaceChildren(...days.slice(0, 400).map((r) => {
+    const tr = document.createElement("tr");
+    const n = start ? Math.round((Date.parse(r.date) - Date.parse(start)) / 864e5) + 1 : null;
+    tr.append(td(fmtD(r.date), "l stick"), td(n ? n + " день" : "", "l mut"),
+      td(fvF.usd2(r.spend), "gs"), td(fvF.int(r.impressions)), td(fvF.int(r.clicks)), td(fvF.pct(div(r.clicks, r.impressions))), td(fvF.int(r.subs)), td(fvF.usd2(div(r.spend, r.subs))),
+      td(fvF.int(r.leads), "gs"), td(r.tag_known ? fvF.int(r.mql) : "—"), td(fvF.int(r.qual)), td(fvF.int(r.paid)), td(fvF.usd(r.revenue)));
+    return tr;
+  }));
+});
+
+// ——— Продажі: ключові показники і турнірна таблиця ———
+dash.draw("sales-kpis", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f) { el.textContent = "—"; return; }
+  const a = fv.selected(f);
+  const card = (label, v, sub, cls) => { const c = el_("div", "fv-kpi" + (cls ? " k-" + cls : "")); c.append(el_("div", "fv-lbl", label), el_("div", "v", v)); if (sub) c.append(el_("div", "fv-small", sub)); return c; };
+  el.append(
+    card("Ліди", fvF.int(a.leads), fvF.int(a.open) + " зараз у роботі"),
+    card("Швидкість взяття", a.taken_med != null ? fvF.int(a.taken_med) + " год" : "—", fvF.pct(div(a.taken24, a.taken)) + " взято за 24 год", light(a.taken_med, FV_T.takenH, true)),
+    card("Кваліфікація", fvF.int(a.qual), fvF.pct(div(a.qual, a.taken)) + " від взятих"),
+    card("Продажі лідів", fvF.int(a.paid), fvF.pct(div(a.paid, a.leads)) + " від лідів", light(div(a.paid, a.leads), FV_T.sale)),
+    card("Виручка лідів", fvF.usd(a.revenue), "середній чек " + fvF.usd(a.check)),
+    card("«Немає зв'язку»", fvF.pct(div(a.no_contact, a.closed)), "від закритих угод", a.closed >= 5 ? light(div(a.no_contact, a.closed), FV_T.noContact, true) : null),
+  );
+});
+
+// ——— Продажі: таблиця планів ———
+dash.draw("plans-rows", (tb) => {
+  const f = fv.data();
+  if (!f) { tb.replaceChildren(); return; }
+  const p = f.p, g = new Map();
+  fv.sub(f, f.deals).forEach((d) => { const o = g.get(d.plan) || { dept: d.dept, deals: [] }; o.deals.push(d); g.set(d.plan, o); });
+  const td = (t, c) => { const e = document.createElement("td"); if (c && c !== "none") e.className = c; e.textContent = t; return e; };
+  const cells = (tr, a) => {
+    const nc = div(a.no_contact, a.closed);
+    tr.append(td(fvF.int(a.leads)), td(fvF.int(a.open)), td(fvF.pct0(div(a.taken, a.leads))), td(fvF.int(a.qual)), td(fvF.int(a.paid), "strong"),
+      td(fvF.pct(div(a.paid, a.leads)), a.leads >= 20 ? "lt-" + light(div(a.paid, a.leads), FV_T.sale) : null), td(fvF.usd(a.revenue), "strong"),
+      td(fvF.pct0(div(a.closed, a.leads))), td(fvF.pct0(nc), a.closed >= 5 ? "lt-" + light(nc, FV_T.noContact, true) : null));
+  };
+  const list = [...g.entries()].map(([name, x]) => ({ name, dept: x.dept, a: fv.agg(x.deals, []) })).sort((x, y) => y.a.leads - x.a.leads);
+  const total = document.createElement("tr"); total.className = "total";
+  total.append(td("Разом", "l name"), td(fvF.int(list.length) + " планів", "l mut")); cells(total, fv.agg(fv.sub(f, f.deals), []));
+  tb.replaceChildren(total, ...list.slice(0, 40).map((r) => {
+    const tr = document.createElement("tr");
+    tr.className = "pick" + (r.name === p.plan ? " on" : "");
+    tr.tabIndex = 0;
+    tr.setAttribute("aria-label", "Показати лише план: " + r.name);
+    tr.append(td(r.name, "l name"), td(r.dept || "—", "l mut")); cells(tr, r.a);
+    const go = () => dash.setParams({ plan: r.name === p.plan ? null : r.name, status: null });
+    tr.onclick = go;
+    tr.onkeydown = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+    return tr;
+  }));
+});
+
+dash.draw("leaderboard", (tb) => {
+  const f = fv.data();
+  if (!f) { tb.replaceChildren(); return; }
+  const mg = new Map();
+  fv.sub(f, f.deals).forEach((d) => { const o = mg.get(d.manager) || []; o.push(d); mg.set(d.manager, o); });
+  const list = [...mg.entries()].map(([n, l]) => ({ n, a: fv.agg(l, []) }));
+  const ranked = list.filter((m) => m.n !== "Не призначено").sort((x, y) => y.a.paid - x.a.paid || y.a.revenue - x.a.revenue || y.a.leads - x.a.leads);
+  const rest = list.filter((m) => m.n === "Не призначено");
+  const maxH = Math.max(1, ...ranked.map((m) => m.a.taken_med || 0));
+  const td = (t, c) => { const e = document.createElement("td"); if (c && c !== "none") e.className = c; if (t != null) e.textContent = t; return e; };
+  const row = (m, rank) => {
+    const a = m.a, tr = document.createElement("tr");
+    if (rank && rank <= 3) tr.className = "top";
+    const r = td(null, "rank"); r.append(el_("span", "fv-rank r" + (rank || 0), rank ? String(rank) : "—"));
+    const sp = td(null, "l speed");
+    const bar = el_("span", "fv-speedbar"); bar.style.width = a.taken_med != null ? Math.max(4, (a.taken_med / maxH) * 100) + "%" : "0";
+    bar.className = "fv-speedbar lt-" + light(a.taken_med, FV_T.takenH, true);
+    const sv = el_("span", "fv-speedval", a.taken_med != null ? fvF.int(a.taken_med) : "—");
+    const wrap = el_("span", "fv-speed"); wrap.append(bar); sp.append(wrap, sv);
+    const nc = div(a.no_contact, a.closed);
+    tr.append(r, td(m.n, "l name"), td(fvF.int(a.leads)), sp, td(fvF.pct0(div(a.taken24, a.taken))), td(fvF.pct0(div(a.dozvon, a.taken))),
+      td(fvF.pct0(div(a.qual, a.taken)), "lt-" + light(div(a.qual, a.taken), FV_T.qual)), td(fvF.int(a.paid), "strong"), td(fvF.pct(div(a.paid, a.leads))),
+      td(fvF.usd(a.revenue), "strong"), td(fvF.pct0(nc), a.closed >= 5 ? "lt-" + light(nc, FV_T.noContact, true) : null), td(fvF.int(a.stuck), a.stuck ? "lt-warn" : null));
+    return tr;
+  };
+  tb.replaceChildren(...ranked.map((m, i) => row(m, i + 1)), ...rest.map((m) => row(m, 0)));
+});
+dash.draw("lb-note", (el) => {
+  const f = fv.data();
+  if (!f) { el.textContent = ""; return; }
+  const n = fv.sub(f, f.deals).filter((d) => d.manager === "Не призначено").length;
+  el.textContent = n ? `${fvF.int(n)} угод без менеджера показані окремо і в рейтинг не входять.` : "";
+});
+
+// ——— Клієнт-сервіс ———
+window.fvSvc = function (rows) {
+  const ans = rows.filter((r) => +r.answered).map((r) => +r.resp_min).sort((x, y) => x - y);
+  return {
+    n: rows.length, answered: ans.length, unanswered: rows.length - ans.length,
+    med: ans.length ? ans[ans.length >> 1] : null,
+    le15: ans.filter((x) => x <= 15).length, gt24h: ans.filter((x) => x > 1440).length,
+  };
+};
+const svcRows = (f) => (f.svc ? fv.sub(f, f.svc) : null);
+const fmtMin = (m) => (m == null ? "—" : m < 60 ? fvF.int(m) + " хв" : m < 1440 ? L.format(",.1f")(m / 60) + " год" : L.format(",.1f")(m / 1440) + " дн.");
+
+dash.draw("svc-kpis", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  const rows = f && svcRows(f);
+  if (!rows) { el.textContent = f && fv.failed("service") ? "Не вдалося завантажити" : "—"; return; }
+  const s = fvSvc(rows);
+  const card = (label, v, sub, cls) => { const c = el_("div", "fv-kpi" + (cls ? " k-" + cls : "")); c.append(el_("div", "fv-lbl", label), el_("div", "v", v)); if (sub) c.append(el_("div", "fv-small", sub)); return c; };
+  el.append(
+    card("Звернень у чатах", fvF.int(s.n), "після потрапляння ліда в план"),
+    card("З відповіддю", fvF.pct(div(s.answered, s.n)), fvF.int(s.answered) + " звернень", light(div(s.answered, s.n), FV_T.svcAnswered)),
+    card("Час відповіді", fmtMin(s.med), "медіана", light(s.med, FV_T.svcMin, true)),
+    card("Відповідь ≤ 15 хв", fvF.pct(div(s.le15, s.answered)), "від звернень з відповіддю"),
+    card("Без відповіді", fvF.int(s.unanswered), "менеджер так і не написав", s.unanswered ? "warn" : null),
+  );
+});
+
+dash.draw("svc-chart", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  const rows = f && svcRows(f);
+  if (!rows) { el.textContent = "—"; return; }
+  if (!rows.length) { el.textContent = "За цей період звернень немає."; return; }
+  const wk = (s) => { const t = new Date(s + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() - ((t.getUTCDay() + 6) % 7)); return t.toISOString().slice(0, 10); };
+  const g = new Map();
+  rows.forEach((r) => { const k = wk(r.date); const o = g.get(k) || { a: 0, u: 0 }; if (+r.answered) o.a++; else o.u++; g.set(k, o); });
+  const data = [...g.entries()].sort(([x], [y]) => x.localeCompare(y)).map(([k, v]) => ({ k, ...v }));
+  const W = Math.max(280, el.clientWidth || 600), H = 200, m = { t: 10, r: 8, b: 24, l: 32 };
+  const svg = d3.select(el).append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("width", "100%").attr("height", H).attr("role", "img")
+    .attr("aria-label", "Звернення по тижнях: " + data.map((d) => `${d.k} ${d.a + d.u}`).join(", "));
+  const x = d3.scaleBand(data.map((d) => d.k), [m.l, W - m.r]).padding(0.2);
+  const y = d3.scaleLinear([0, d3.max(data, (d) => d.a + d.u) || 1], [H - m.b, m.t]).nice();
+  svg.append("g").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.l - m.r)))
+    .call((a) => { a.select(".domain").remove(); a.selectAll("line").style("stroke", "var(--cds-chart-grid)"); a.selectAll("text").attr("class", "t-mut"); });
+  const step = Math.ceil(data.length / Math.max(2, Math.floor((W - m.l) / 60)));
+  svg.append("g").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickSize(0).tickFormat((d, i) => (i % step ? "" : d.slice(8, 10) + "." + d.slice(5, 7))))
+    .call((a) => { a.select(".domain").style("stroke", "var(--cds-chart-axis)"); a.selectAll("text").attr("class", "t-mut").attr("dy", "1em"); });
+  const tip = fvTip(el);
+  data.forEach((d) => {
+    const g2 = svg.append("g");
+    g2.append("rect").attr("x", x(d.k)).attr("width", x.bandwidth()).attr("y", y(d.a)).attr("height", y(0) - y(d.a)).attr("rx", 2).style("fill", "var(--lee-blue)");
+    g2.append("rect").attr("x", x(d.k)).attr("width", x.bandwidth()).attr("y", y(d.a + d.u)).attr("height", y(d.a) - y(d.a + d.u)).attr("rx", 2).style("fill", "var(--lee-coral)");
+    g2.append("rect").attr("x", x(d.k) - (x.step() - x.bandwidth()) / 2).attr("width", x.step()).attr("y", m.t).attr("height", H - m.t - m.b).style("fill", "transparent")
+      .on("pointermove", (ev) => tip.show(ev, "Тиждень з " + d.k.split("-").reverse().join("."), `${fvF.int(d.a + d.u)} звернень · без відповіді ${fvF.int(d.u)}`))
+      .on("pointerleave", () => tip.hide());
+  });
+});
+
+dash.draw("svc-rows", (tb) => {
+  const f = fv.data();
+  const rows = f && svcRows(f);
+  if (!rows) { tb.replaceChildren(); return; }
+  const g = new Map();
+  rows.forEach((r) => { const o = g.get(r.deal_manager) || []; o.push(r); g.set(r.deal_manager, o); });
+  const td = (t, c) => { const e = document.createElement("td"); if (c && c !== "none") e.className = c; e.textContent = t; return e; };
+  const row = (name, s, cls) => {
+    const tr = document.createElement("tr"); if (cls) tr.className = cls;
+    tr.append(td(name, "l name"), td(fvF.int(s.n)), td(fvF.pct0(div(s.answered, s.n)), "lt-" + light(div(s.answered, s.n), FV_T.svcAnswered)),
+      td(fmtMin(s.med), "lt-" + light(s.med, FV_T.svcMin, true)), td(fvF.pct0(div(s.le15, s.answered))), td(fvF.int(s.gt24h), s.gt24h ? "lt-warn" : null), td(fvF.int(s.unanswered), s.unanswered ? "lt-bad" : null));
+    return tr;
+  };
+  tb.replaceChildren(row("Усі менеджери", fvSvc(rows), "total"),
+    ...[...g.entries()].map(([n, l]) => ({ n, s: fvSvc(l) })).sort((x, y) => y.s.n - x.s.n).map((m) => row(m.n, m.s)));
+});
+
+// ——— Підтримка: звернення в планах підтримки ———
+window.fvSup = function (rows) {
+  const hs = rows.filter((r) => +r.done && r.hours != null).map((r) => +r.hours).sort((x, y) => x - y);
+  return { n: rows.length, done: rows.filter((r) => +r.done).length, bad: rows.filter((r) => +r.bad).length, open: rows.filter((r) => +r.open).length, med: hs.length ? hs[hs.length >> 1] : null };
+};
+dash.draw("sup-kpis", (el) => {
+  const f = fv.data();
+  el.replaceChildren();
+  if (!f || !f.sup) { el.textContent = f && fv.failed("support") ? "Не вдалося завантажити" : "—"; return; }
+  const s = fvSup(f.sup);
+  const card = (label, v, sub, cls) => { const c = el_("div", "fv-kpi" + (cls ? " k-" + cls : "")); c.append(el_("div", "fv-lbl", label), el_("div", "v", v)); if (sub) c.append(el_("div", "fv-small", sub)); return c; };
+  el.append(
+    card("Звернень у підтримку", fvF.int(s.n), "угоди в планах підтримки"),
+    card("Закрито", fvF.pct(div(s.done, s.n)), fvF.int(s.done) + " звернень", light(div(s.done, s.n), FV_T.supDone)),
+    card("Час до закриття", fmtMin(s.med == null ? null : s.med * 60), "медіана"),
+    card("Незадовільна оцінка", fvF.int(s.bad), fvF.pct(div(s.bad, s.n)) + " звернень", s.n ? light(div(s.bad, s.n), FV_T.supBad, true) : null),
+    card("Відкриті зараз", fvF.int(s.open), "ще не закриті", s.open ? "warn" : null),
+  );
+});
+dash.draw("sup-rows", (tb) => {
+  const f = fv.data();
+  if (!f || !f.sup) { tb.replaceChildren(); return; }
+  const g = new Map();
+  f.sup.forEach((r) => { const o = g.get(r.plan) || []; o.push(r); g.set(r.plan, o); });
+  const td = (t, c) => { const e = document.createElement("td"); if (c && c !== "none") e.className = c; e.textContent = t; return e; };
+  const row = (name, s, cls) => {
+    const tr = document.createElement("tr"); if (cls) tr.className = cls;
+    tr.append(td(name, "l name"), td(fvF.int(s.n)), td(fvF.pct0(div(s.done, s.n)), s.n >= 5 ? "lt-" + light(div(s.done, s.n), FV_T.supDone) : null),
+      td(fmtMin(s.med == null ? null : s.med * 60)), td(fvF.int(s.bad), s.bad ? "lt-bad" : null), td(fvF.int(s.open), s.open ? "lt-warn" : null));
+    return tr;
+  };
+  if (!f.sup.length) { const tr = document.createElement("tr"); tr.append(td("За цей період звернень немає.", "l")); tb.replaceChildren(tr); return; }
+  tb.replaceChildren(row("Усі плани підтримки", fvSup(f.sup), "total"),
+    ...[...g.entries()].map(([n, l]) => ({ n, s: fvSup(l) })).sort((x, y) => y.s.n - x.s.n).map((m) => row(m.n, m.s)));
+});
+
+// ——— Оплати за період (за датою оплати) ———
+const payRows = (f) => (f && f.sales ? fv.sub(f, f.sales) : null);
+dash.draw("pay-total", (el) => { const r = payRows(fv.data()); el.textContent = r ? fvF.usd(r.reduce((s, x) => s + (+x.usd || 0), 0)) + " · " + fvF.int(r.length) + " оплат" : "—"; });
+function payTable(tb, key) {
+  const r = payRows(fv.data());
+  if (!r) { tb.replaceChildren(); return; }
+  const g = new Map();
+  r.forEach((x) => { const o = g.get(x[key]) || { n: 0, sum: 0, nw: 0 }; o.n += 1; o.sum += +x.usd || 0; if (+x.newc) o.nw += +x.usd || 0; g.set(x[key], o); });
+  const list = [...g.entries()].sort((a, b) => b[1].sum - a[1].sum);
+  const top = list.slice(0, 10), rest = list.slice(10);
+  const td = (t, c) => { const e = document.createElement("td"); if (c) e.className = c; e.textContent = t; return e; };
+  const row = (name, o, cls) => { const tr = document.createElement("tr"); if (cls) tr.className = cls; tr.append(td(name, "l name"), td(fvF.int(o.n)), td(fvF.usd(o.sum), "strong"), td(o.nw ? fvF.usd(o.nw) : "—", "mut")); return tr; };
+  const rows = top.map(([n, o]) => row(n, o));
+  if (rest.length) rows.push(row("Інші (" + rest.length + ")", rest.reduce((a, [, o]) => ({ n: a.n + o.n, sum: a.sum + o.sum, nw: a.nw + o.nw }), { n: 0, sum: 0, nw: 0 }), "mut"));
+  if (!rows.length) { const tr = document.createElement("tr"); tr.append(td("За цей період оплат немає.", "l")); rows.push(tr); }
+  tb.replaceChildren(...rows);
+}
+dash.draw("pay-plans", (tb) => payTable(tb, "plan"));
+dash.draw("pay-managers", (tb) => payTable(tb, "manager"));
+dash.draw("pay-products", (tb) => payTable(tb, "product"));
+dash.draw("pay-tunnels", (tb) => payTable(tb, "tunnel"));
+
+// ——— SQL-ліди за період (за тегом) ———
+const sqRows = (f) => (f && f.sq ? fv.sub(f, f.sq) : null);
+const sqAgg = (rows) => { const t = rows.filter((r) => +r.tagged); return { t: t.length, u: rows.length - t.length, nw: t.filter((r) => +r.newcontact).length, paid: t.filter((r) => +r.paid).length, usd: t.reduce((a, r) => a + (+r.usd || 0), 0) }; };
+dash.draw("sql-total", (el) => { const r = sqRows(fv.data()); el.textContent = r ? fvF.int(sqAgg(r).t) + " з тегом SQL" : "—"; });
+dash.draw("sql-kpis", (el) => {
+  const f = fv.data(), r = sqRows(f);
+  el.replaceChildren();
+  if (!r) { el.textContent = f && fv.failed("sql") ? "Не вдалося завантажити" : "—"; return; }
+  const a = sqAgg(r);
+  const card = (label, v, sub, cls) => { const c = el_("div", "fv-kpi" + (cls ? " k-" + cls : "")); c.append(el_("div", "fv-lbl", label), el_("div", "v", v)); if (sub) c.append(el_("div", "fv-small", sub)); return c; };
+  el.append(
+    card("Стали SQL", fvF.int(a.t), "тег SQL і кваліфікація за період"),
+    card("Контакти цього року", fvF.int(a.nw), fvF.pct0(div(a.nw, a.t)) + " SQL-лідів, решта — стара база"),
+    card("Оплатили", fvF.int(a.paid), fvF.pct(div(a.paid, a.t)) + " SQL-лідів"),
+    card("Виручка SQL-лідів", fvF.usd(a.usd), "оплати після створення угоди"),
+    card("Без тега SQL", fvF.int(a.u), "дійшли до кваліфікації без тега", a.u ? "warn" : null),
+  );
+});
+function sqTable(tb, key) {
+  const r = sqRows(fv.data());
+  if (!r) { tb.replaceChildren(); return; }
+  const g = new Map();
+  r.forEach((x) => { const o = g.get(x[key]) || []; o.push(x); g.set(x[key], o); });
+  const td = (t, c) => { const e = document.createElement("td"); if (c) e.className = c; e.textContent = t; return e; };
+  const row = (name, a, cls) => { const tr = document.createElement("tr"); if (cls) tr.className = cls; tr.append(td(name, "l name"), td(fvF.int(a.t), "strong"), td(a.u ? fvF.int(a.u) : "—", a.u ? "lt-warn" : "mut"), td(fvF.int(a.paid)), td(a.usd ? fvF.usd(a.usd) : "—")); return tr; };
+  if (!r.length) { const tr = document.createElement("tr"); tr.append(td("За цей період SQL-лідів немає.", "l")); tb.replaceChildren(tr); return; }
+  const list = [...g.entries()].map(([n, l]) => ({ n, a: sqAgg(l) })).sort((x, y) => y.a.t - x.a.t || y.a.u - x.a.u);
+  tb.replaceChildren(row("Разом", sqAgg(r), "total"), ...list.slice(0, 15).map((m) => row(m.n, m.a)));
+}
+dash.draw("sql-plans", (tb) => sqTable(tb, "plan"));
+dash.draw("sql-managers", (tb) => sqTable(tb, "manager"));
+
+// ——— Весь час ———
+const atRows = (id) => fv.rows(id);
+const atTd = (t, c) => { const e = document.createElement("td"); if (c) e.className = c; e.textContent = t; return e; };
+dash.draw("at-kpis", (el) => {
+  const y = atRows("at_years"), t = (atRows("at_totals") || [])[0];
+  el.replaceChildren();
+  if (!y || !t) { el.textContent = fv.failed("at_years", "at_totals") ? "Не вдалося завантажити" : "—"; return; }
+  const sum = (k) => y.reduce((a, r) => a + (+r[k] || 0), 0);
+  const card = (label, v, sub) => { const c = el_("div", "fv-kpi"); c.append(el_("div", "fv-lbl", label), el_("div", "v", v)); if (sub) c.append(el_("div", "fv-small", sub)); return c; };
+  const fmtD = (d) => (d ? d.split("-").reverse().join(".") : "—");
+  el.append(
+    card("Виручка за весь час", fvF.usd(sum("usd")), "з " + fmtD(t.first_order)),
+    card("Оплат", fvF.int(sum("orders")), "середній чек " + fvF.usd(div(sum("usd"), sum("orders")))),
+    card("Клієнтів, що платили", fvF.int(t.buyers), fvF.usd(div(sum("usd"), t.buyers)) + " на клієнта"),
+    card("Контактів у платформі", fvF.int(t.contacts), fvF.pct(div(t.buyers, t.contacts)) + " стали клієнтами"),
+    card("Угод у планах продажів", fvF.int(t.deals), fvF.int(t.plans) + " планів · успішних " + fvF.int(t.won)),
+    card("Реклама Meta", fvF.usd(sum("spend")), (t.ad_from ? "з " + t.ad_from.split("-").reverse().join(".") : "не підключено") + (t.ad_accounts ? " · кабінетів: " + fvF.int(t.ad_accounts) : "")),
+  );
+});
+dash.draw("at-chart", (el) => {
+  const data = atRows("at_months");
+  el.replaceChildren();
+  if (!data) { el.textContent = fv.failed("at_months") ? "Не вдалося завантажити" : "—"; return; }
+  if (!data.length) { el.textContent = "Оплат немає."; return; }
+  const W = Math.max(280, el.clientWidth || 600), H = 240, m = { t: 10, r: 8, b: 24, l: 48 };
+  const svg = d3.select(el).append("svg").attr("viewBox", "0 0 " + W + " " + H).attr("width", "100%").attr("height", H).attr("role", "img")
+    .attr("aria-label", "Виручка за місяцями з " + data[0].month + " до " + data[data.length - 1].month);
+  const x = d3.scaleBand(data.map((d) => d.month), [m.l, W - m.r]).padding(0.15);
+  const y = d3.scaleLinear([0, d3.max(data, (d) => +d.usd) || 1], [H - m.b, m.t]).nice();
+  svg.append("g").attr("transform", "translate(" + m.l + ",0)").call(d3.axisLeft(y).ticks(4).tickSize(-(W - m.l - m.r)).tickFormat((v) => (v >= 1000 ? "$" + L.format(",.0f")(v / 1000) + " тис." : "$" + v)))
+    .call((a) => { a.select(".domain").remove(); a.selectAll("line").style("stroke", "var(--cds-chart-grid)"); a.selectAll("text").attr("class", "t-mut"); });
+  const jan = data.filter((d) => d.month.endsWith("-01")).map((d) => d.month);
+  const step = Math.ceil(jan.length / Math.max(2, Math.floor((W - m.l) / 48)));
+  svg.append("g").attr("transform", "translate(0," + (H - m.b) + ")").call(d3.axisBottom(x).tickValues(jan.filter((_, i) => i % step === 0)).tickSize(0).tickFormat((d) => d.slice(0, 4)))
+    .call((a) => { a.select(".domain").style("stroke", "var(--cds-chart-axis)"); a.selectAll("text").attr("class", "t-mut").attr("dy", "1em"); });
+  const tip = fvTip(el);
+  const MN = ["січ", "лют", "бер", "кві", "тра", "чер", "лип", "сер", "вер", "жов", "лис", "гру"];
+  data.forEach((d) => {
+    const rep = Math.max(0, +d.usd - (+d.new_usd || 0));
+    const g = svg.append("g");
+    g.append("rect").attr("x", x(d.month)).attr("width", x.bandwidth()).attr("y", y(rep)).attr("height", y(0) - y(rep)).style("fill", "var(--lee-blue)");
+    g.append("rect").attr("x", x(d.month)).attr("width", x.bandwidth()).attr("y", y(+d.usd)).attr("height", y(rep) - y(+d.usd)).style("fill", "var(--lee-lime)");
+    g.append("rect").attr("x", x(d.month) - (x.step() - x.bandwidth()) / 2).attr("width", x.step()).attr("y", m.t).attr("height", H - m.t - m.b).style("fill", "transparent")
+      .on("pointermove", (ev) => tip.show(ev, MN[+d.month.slice(5, 7) - 1] + " " + d.month.slice(0, 4) + ": " + fvF.usd(d.usd), fvF.int(d.orders) + " оплат · нові клієнти " + fvF.usd(d.new_usd)))
+      .on("pointerleave", () => tip.hide());
+  });
+});
+dash.draw("at-years", (tb) => {
+  const y = atRows("at_years");
+  if (!y) { tb.replaceChildren(); return; }
+  const row = (r, name, cls) => { const tr = document.createElement("tr"); if (cls) tr.className = cls;
+    tr.append(atTd(name, "l name"), atTd(fvF.usd(r.usd), "strong"), atTd(fvF.int(r.orders)), atTd(fvF.usd(div(r.usd, r.orders))), atTd(r.buyers != null ? fvF.int(r.buyers) : "—"),
+      atTd(fvF.int(r.new_buyers)), atTd(fvF.usd(r.new_usd)), atTd(r.spend != null ? fvF.usd(r.spend) : "—", r.spend != null ? null : "mut")); return tr; };
+  const sum = (k) => y.reduce((a, r) => a + (+r[k] || 0), 0);
+  const hasAd = y.some((r) => r.spend != null);
+  tb.replaceChildren(row({ usd: sum("usd"), orders: sum("orders"), buyers: null, new_buyers: sum("new_buyers"), new_usd: sum("new_usd"), spend: hasAd ? sum("spend") : null }, "Разом", "total"),
+    ...y.slice().reverse().map((r) => row(r, r.year)));
+});
+dash.draw("at-ad-note", (el) => {
+  const t = (atRows("at_totals") || [])[0];
+  el.textContent = t ? (t.ad_from ? "Реклама Meta є з " + t.ad_from.split("-").reverse().join(".") + ": раніших даних Meta не віддає. " : "Рекламу Meta не підключено, тому витрат немає. ") + "Клієнтів за рік не можна скласти в «Разом»: одна людина платить у різні роки." : "";
+});
+dash.draw("at-products", (tb) => {
+  const p = atRows("at_products");
+  if (!p) { tb.replaceChildren(); return; }
+  tb.replaceChildren(...p.slice(0, 20).map((r) => { const tr = document.createElement("tr");
+    tr.append(atTd(r.product, "l name"), atTd(fvF.int(r.orders)), atTd(fvF.usd(r.usd), "strong"), atTd(fvF.usd(div(r.usd, r.orders))), atTd(r.first === r.last ? r.first : r.first + "–" + r.last, "mut")); return tr; }));
+});
+dash.draw("at-tunnels", (tb) => {
+  const t = atRows("at_tunnels");
+  if (!t) { tb.replaceChildren(); return; }
+  const row = (r, name, cls) => { const tr = document.createElement("tr"); if (cls) tr.className = cls;
+    tr.append(atTd(name, "l name"), atTd(r.created ? r.created.slice(0, 4) : "", "mut"), atTd(fvF.int(r.subscribers)), atTd(fvF.int(r.uniq)), atTd(fvF.int(r.orders)), atTd(fvF.int(r.sales)),
+      atTd(fvF.pct(div(r.sales, r.uniq))), atTd(fvF.int(r.total), "strong")); return tr; };
+  const sum = (k) => t.reduce((a, r) => a + (+r[k] || 0), 0);
+  tb.replaceChildren(row({ subscribers: sum("subscribers"), uniq: sum("uniq"), orders: sum("orders"), sales: sum("sales"), total: sum("total") }, "Усі тунелі (" + fvF.int(t.length) + ")", "total"),
+    ...t.slice(0, 30).map((r) => row(r, r.tunnel)));
+});
+dash.draw("at-plans", (tb) => {
+  const p = atRows("at_plans");
+  if (!p) { tb.replaceChildren(); return; }
+  const row = (r, name, dept, cls) => { const tr = document.createElement("tr"); if (cls) tr.className = cls;
+    tr.append(atTd(name, "l name"), atTd(dept, "l mut"), atTd(r.created || "", "mut"), atTd(fvF.int(r.deals)), atTd(fvF.int(r.entry)), atTd(fvF.int(r.work)), atTd(fvF.int(r.won), "strong"), atTd(fvF.int(r.closed)),
+      atTd(fvF.pct(div(r.won, r.deals)))); return tr; };
+  const sum = (k) => p.reduce((a, r) => a + (+r[k] || 0), 0);
+  tb.replaceChildren(row({ deals: sum("deals"), entry: sum("entry"), work: sum("work"), won: sum("won"), closed: sum("closed") }, "Усі плани (" + fvF.int(p.length) + ")", "", "total"),
+    ...p.slice(0, 30).map((r) => row(r, r.plan, r.dept)));
+});
+</script>
